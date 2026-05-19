@@ -1,3 +1,4 @@
+/// <reference types="google.maps" />
 /**
  * Lazy loader for Google Maps JS API.
  * Loads only on demand (when component mounts AND user is online).
