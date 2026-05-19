@@ -17,6 +17,7 @@ import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as HospedagemRouteImport } from './routes/hospedagem'
 import { Route as GastronomiaRouteImport } from './routes/gastronomia'
 import { Route as DesenvolvedoresRouteImport } from './routes/desenvolvedores'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoloIdRouteImport } from './routes/polo.$id'
@@ -61,6 +62,11 @@ const DesenvolvedoresRoute = DesenvolvedoresRouteImport.update({
   path: '/desenvolvedores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AtracoesRoute = AtracoesRouteImport.update({
   id: '/atracoes',
   path: '/atracoes',
@@ -80,6 +86,7 @@ const PoloIdRoute = PoloIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/atracoes'
+    | '/configuracoes'
     | '/desenvolvedores'
     | '/gastronomia'
     | '/hospedagem'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/atracoes'
+    | '/configuracoes'
     | '/desenvolvedores'
     | '/gastronomia'
     | '/hospedagem'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/atracoes'
+    | '/configuracoes'
     | '/desenvolvedores'
     | '/gastronomia'
     | '/hospedagem'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AtracoesRoute: typeof AtracoesRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
   DesenvolvedoresRoute: typeof DesenvolvedoresRoute
   GastronomiaRoute: typeof GastronomiaRoute
   HospedagemRoute: typeof HospedagemRoute
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesenvolvedoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/atracoes': {
       id: '/atracoes'
       path: '/atracoes'
@@ -258,6 +278,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AtracoesRoute: AtracoesRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
   DesenvolvedoresRoute: DesenvolvedoresRoute,
   GastronomiaRoute: GastronomiaRoute,
   HospedagemRoute: HospedagemRoute,
