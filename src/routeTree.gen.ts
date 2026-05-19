@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TurismoRouteImport } from './routes/turismo'
+import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
 import { Route as MapaRouteImport } from './routes/mapa'
@@ -22,6 +23,11 @@ import { Route as PoloIdRouteImport } from './routes/polo.$id'
 const TurismoRoute = TurismoRouteImport.update({
   id: '/turismo',
   path: '/turismo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramacaoRoute = ProgramacaoRouteImport.update({
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
   '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
   '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
   '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/sobre'
     | '/turismo'
     | '/polo/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/sobre'
     | '/turismo'
     | '/polo/$id'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/sobre'
     | '/turismo'
     | '/polo/$id'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   MapaRoute: typeof MapaRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
+  SobreRoute: typeof SobreRoute
   TurismoRoute: typeof TurismoRoute
   PoloIdRoute: typeof PoloIdRoute
 }
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/turismo'
       fullPath: '/turismo'
       preLoaderRoute: typeof TurismoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programacao': {
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   MapaRoute: MapaRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
+  SobreRoute: SobreRoute,
   TurismoRoute: TurismoRoute,
   PoloIdRoute: PoloIdRoute,
 }
