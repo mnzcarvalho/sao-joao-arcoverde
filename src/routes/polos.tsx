@@ -17,7 +17,7 @@ function Polos() {
       <ul className="space-y-3 px-4">
         {data.polos.map(p => (
           <li key={p.id}>
-            <Link to="/polos/$id" params={{ id: p.id }} className="card-tile block p-4 transition active:scale-[0.99]">
+            <Link to="/polo/$id" params={{ id: p.id }} className="card-tile block p-4 transition active:scale-[0.99]">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
                   <h3 className="font-display text-lg font-semibold">{p.nome}</h3>
