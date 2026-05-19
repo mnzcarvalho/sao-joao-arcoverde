@@ -16,6 +16,7 @@ import { Route as PolosRouteImport } from './routes/polos'
 import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as HospedagemRouteImport } from './routes/hospedagem'
 import { Route as GastronomiaRouteImport } from './routes/gastronomia'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as DesenvolvedoresRouteImport } from './routes/desenvolvedores'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as AtracoesRouteImport } from './routes/atracoes'
@@ -57,6 +58,11 @@ const GastronomiaRoute = GastronomiaRouteImport.update({
   path: '/gastronomia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesenvolvedoresRoute = DesenvolvedoresRouteImport.update({
   id: '/desenvolvedores',
   path: '/desenvolvedores',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
+    | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mapa'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
+    | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mapa'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
+    | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mapa'
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   AtracoesRoute: typeof AtracoesRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   DesenvolvedoresRoute: typeof DesenvolvedoresRoute
+  FavoritosRoute: typeof FavoritosRoute
   GastronomiaRoute: typeof GastronomiaRoute
   HospedagemRoute: typeof HospedagemRoute
   MapaRoute: typeof MapaRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GastronomiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/desenvolvedores': {
       id: '/desenvolvedores'
       path: '/desenvolvedores'
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   AtracoesRoute: AtracoesRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   DesenvolvedoresRoute: DesenvolvedoresRoute,
+  FavoritosRoute: FavoritosRoute,
   GastronomiaRoute: GastronomiaRoute,
   HospedagemRoute: HospedagemRoute,
   MapaRoute: MapaRoute,
