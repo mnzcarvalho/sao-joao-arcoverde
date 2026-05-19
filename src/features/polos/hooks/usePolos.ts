@@ -7,5 +7,5 @@ export function usePolos(): Polo[] {
 }
 
 export function usePolo(id: string | undefined): Polo | undefined {
-  return useLiveQuery(() => (id ? polosRepo.get(id) : Promise.resolve(undefined)), [id]);
+  return useLiveQuery(async () => (id ? await polosRepo.get(id) : undefined), [id]);
 }
