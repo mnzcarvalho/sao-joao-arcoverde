@@ -40,6 +40,7 @@ export async function registerServiceWorker(
     registerSW({
       immediate: true,
       onNeedRefresh() {
+        window.dispatchEvent(new Event("sjarcoverde:update-available"));
         onUpdateAvailable?.();
       },
       onOfflineReady() {
