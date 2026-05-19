@@ -1,0 +1,7 @@
+[
+  { "id": "t1", "nome": "Igreja Matriz Nossa Senhora do Livramento", "tipo": "turismo", "descricao": "Marco histórico e arquitetônico do município, sede da padroeira.", "endereco": "Praça Cel. Antônio Japiassu" },
+  { "id": "t2", "nome": "Serra das Princesas", "tipo": "turismo", "descricao": "Trilhas e vista panorâmica do sertão pernambucano.", "endereco": "Zona Rural, 15 km do centro" },
+  { "id": "t3", "nome": "Memorial do Forró", "tipo": "turismo", "descricao": "Acervo dedicado à história do forró e dos grandes nomes da música nordestina.", "endereco": "Centro Cultural de Arcoverde" },
+  { "id": "t4", "nome": "Açude Cachoeira", "tipo": "turismo", "descricao": "Reserva hídrica com área de lazer e mirante.", "endereco": "Estrada do Açude, s/n" },
+  { "id": "t5", "nome": "Feira Livre de Arcoverde", "tipo": "turismo", "descricao": "Tradicional feira de produtos regionais às quartas e sábados.", "endereco": "Centro" }
+]

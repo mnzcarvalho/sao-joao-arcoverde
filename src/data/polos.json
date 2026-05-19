@@ -1,0 +1,47 @@
+[
+  {
+    "id": "matriz",
+    "nome": "Polo Matriz",
+    "descricao": "O coração do São João de Arcoverde, em frente à Igreja Matriz. Grandes shows nacionais.",
+    "endereco": "Praça Cel. Antônio Japiassu, Centro",
+    "lat": -8.4186,
+    "lng": -37.0563,
+    "horario": "Diariamente, das 18h às 04h"
+  },
+  {
+    "id": "forrozao",
+    "nome": "Polo Forrozão",
+    "descricao": "Pé de serra, sanfona, zabumba e triângulo: o forró raiz acontece aqui.",
+    "endereco": "Av. Cel. Antônio Japiassu, s/n",
+    "lat": -8.4202,
+    "lng": -37.0578,
+    "horario": "Diariamente, das 19h às 03h"
+  },
+  {
+    "id": "raizes",
+    "nome": "Polo Raízes Culturais",
+    "descricao": "Quadrilhas, xaxado, maracatu e cultura popular pernambucana.",
+    "endereco": "Praça da Cultura",
+    "lat": -8.417,
+    "lng": -37.055,
+    "horario": "Diariamente, das 17h às 23h"
+  },
+  {
+    "id": "gastronomico",
+    "nome": "Polo Gastronômico",
+    "descricao": "Comidas típicas, cuscuz, canjica, pamonha, bolo de milho e caldos.",
+    "endereco": "Rua da Conceição, Centro",
+    "lat": -8.4195,
+    "lng": -37.057,
+    "horario": "Diariamente, das 16h às 02h"
+  },
+  {
+    "id": "infantil",
+    "nome": "Polo Infantil",
+    "descricao": "Brinquedos, oficinas, contação de histórias e quadrilha mirim.",
+    "endereco": "Parque Municipal",
+    "lat": -8.4155,
+    "lng": -37.054,
+    "horario": "Sábados e domingos, 15h às 21h"
+  }
+]

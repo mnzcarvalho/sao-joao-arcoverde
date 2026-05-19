@@ -1,0 +1,6 @@
+[
+  { "id": "h1", "nome": "Hotel Arcoverde Palace", "tipo": "hospedagem", "descricao": "Hotel central com café da manhã regional.", "endereco": "Av. Cel. Antônio Japiassu, 300", "contato": "(87) 3821-2000", "preco": "$$$" },
+  { "id": "h2", "nome": "Pousada Pé de Serra", "tipo": "hospedagem", "descricao": "Acolhedora pousada familiar a 5 min do Polo Matriz.", "endereco": "Rua das Flores, 45", "contato": "(87) 99999-1111", "preco": "$$" },
+  { "id": "h3", "nome": "Pousada Luar do Sertão", "tipo": "hospedagem", "descricao": "Quartos confortáveis com ar-condicionado.", "endereco": "Rua Nova, 210", "contato": "(87) 99888-2222", "preco": "$$" },
+  { "id": "h4", "nome": "Camping São João", "tipo": "hospedagem", "descricao": "Área de camping próxima aos polos com banheiros e segurança.", "endereco": "Saída para Sertânia, km 3", "preco": "$" }
+]

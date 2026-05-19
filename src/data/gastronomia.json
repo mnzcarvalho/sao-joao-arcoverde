@@ -1,0 +1,6 @@
+[
+  { "id": "g1", "nome": "Restaurante Sabor do Sertão", "tipo": "comida", "descricao": "Carne de sol, queijo coalho, baião de dois.", "endereco": "Rua Pernambuco, 120", "contato": "(87) 3821-1234", "preco": "$$" },
+  { "id": "g2", "nome": "Cantinho da Canjica", "tipo": "comida", "descricao": "Comidas típicas juninas, canjica, pamonha, mungunzá.", "endereco": "Praça Central, s/n", "contato": "(87) 3821-5678", "preco": "$" },
+  { "id": "g3", "nome": "Forró & Buchada", "tipo": "comida", "descricao": "Buchada de bode, sarapatel, cozido nordestino.", "endereco": "Av. Cel. Japiassu, 450", "contato": "(87) 3821-9999", "preco": "$$" },
+  { "id": "g4", "nome": "Bar do Sanfoneiro", "tipo": "comida", "descricao": "Tira-gostos, petiscos e cerveja gelada com forró ao vivo.", "endereco": "Rua da Matriz, 88", "preco": "$$" }
+]

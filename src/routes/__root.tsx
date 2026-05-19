@@ -11,7 +11,10 @@ import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import { BottomNav } from "@/components/BottomNav";
-import { loadData } from "@/lib/store";
+import { seedIfNeeded } from "@/db/seed";
+import { registerServiceWorker } from "@/pwa/registerSW";
+import { UpdatePrompt } from "@/pwa/UpdatePrompt";
+import { InstallPrompt } from "@/pwa/InstallPrompt";
 
 function NotFoundComponent() {
   return (
@@ -99,27 +102,18 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   useEffect(() => {
-    // Seed offline cache on first run
-    loadData();
-
-    // Register service worker only outside iframes / preview hosts
-    const isInIframe = (() => {
-      try { return window.self !== window.top; } catch { return true; }
-    })();
-    const host = window.location.hostname;
-    const isPreview = host.includes("lovableproject.com") || host.includes("lovable.app") || host.includes("id-preview--");
-
-    if (isPreview || isInIframe) {
-      navigator.serviceWorker?.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
-    } else if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
-    }
+    // Seed IndexedDB on first run (idempotent).
+    seedIfNeeded().catch((err) => console.error("[db] seed failed", err));
+    // Register PWA service worker (guards preview/iframe internally).
+    registerServiceWorker();
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <BottomNav />
+      <UpdatePrompt />
+      <InstallPrompt />
     </QueryClientProvider>
   );
 }
