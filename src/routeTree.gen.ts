@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
 import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as HospedagemRouteImport } from './routes/hospedagem'
 import { Route as GastronomiaRouteImport } from './routes/gastronomia'
 import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
@@ -30,6 +31,11 @@ const PolosRoute = PolosRouteImport.update({
 const MapaRoute = MapaRouteImport.update({
   id: '/mapa',
   path: '/mapa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospedagemRoute = HospedagemRouteImport.update({
+  id: '/hospedagem',
+  path: '/hospedagem',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GastronomiaRoute = GastronomiaRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
   '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
   '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/atracoes': typeof AtracoesRoute
   '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/atracoes'
     | '/gastronomia'
+    | '/hospedagem'
     | '/mapa'
     | '/polos'
     | '/programacao'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/atracoes'
     | '/gastronomia'
+    | '/hospedagem'
     | '/mapa'
     | '/polos'
     | '/programacao'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/atracoes'
     | '/gastronomia'
+    | '/hospedagem'
     | '/mapa'
     | '/polos'
     | '/programacao'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AtracoesRoute: typeof AtracoesRoute
   GastronomiaRoute: typeof GastronomiaRoute
+  HospedagemRoute: typeof HospedagemRoute
   MapaRoute: typeof MapaRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/mapa'
       fullPath: '/mapa'
       preLoaderRoute: typeof MapaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospedagem': {
+      id: '/hospedagem'
+      path: '/hospedagem'
+      fullPath: '/hospedagem'
+      preLoaderRoute: typeof HospedagemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gastronomia': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AtracoesRoute: AtracoesRoute,
   GastronomiaRoute: GastronomiaRoute,
+  HospedagemRoute: HospedagemRoute,
   MapaRoute: MapaRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
