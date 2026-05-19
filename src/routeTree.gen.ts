@@ -9,38 +9,295 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TurismoRouteImport } from './routes/turismo'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as ProgramacaoRouteImport } from './routes/programacao'
+import { Route as PolosRouteImport } from './routes/polos'
+import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as MaisRouteImport } from './routes/mais'
+import { Route as HospedagemRouteImport } from './routes/hospedagem'
+import { Route as GastronomiaRouteImport } from './routes/gastronomia'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as DesenvolvedoresRouteImport } from './routes/desenvolvedores'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
+import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoloIdRouteImport } from './routes/polo.$id'
 
+const TurismoRoute = TurismoRouteImport.update({
+  id: '/turismo',
+  path: '/turismo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramacaoRoute = ProgramacaoRouteImport.update({
+  id: '/programacao',
+  path: '/programacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PolosRoute = PolosRouteImport.update({
+  id: '/polos',
+  path: '/polos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapaRoute = MapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaisRoute = MaisRouteImport.update({
+  id: '/mais',
+  path: '/mais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospedagemRoute = HospedagemRouteImport.update({
+  id: '/hospedagem',
+  path: '/hospedagem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GastronomiaRoute = GastronomiaRouteImport.update({
+  id: '/gastronomia',
+  path: '/gastronomia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesenvolvedoresRoute = DesenvolvedoresRouteImport.update({
+  id: '/desenvolvedores',
+  path: '/desenvolvedores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtracoesRoute = AtracoesRouteImport.update({
+  id: '/atracoes',
+  path: '/atracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoloIdRoute = PoloIdRouteImport.update({
+  id: '/polo/$id',
+  path: '/polo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
+  '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
+  '/mais': typeof MaisRoute
+  '/mapa': typeof MapaRoute
+  '/polos': typeof PolosRoute
+  '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
+  '/turismo': typeof TurismoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
+  '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
+  '/mais': typeof MaisRoute
+  '/mapa': typeof MapaRoute
+  '/polos': typeof PolosRoute
+  '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
+  '/turismo': typeof TurismoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/desenvolvedores': typeof DesenvolvedoresRoute
+  '/favoritos': typeof FavoritosRoute
+  '/gastronomia': typeof GastronomiaRoute
+  '/hospedagem': typeof HospedagemRoute
+  '/mais': typeof MaisRoute
+  '/mapa': typeof MapaRoute
+  '/polos': typeof PolosRoute
+  '/programacao': typeof ProgramacaoRoute
+  '/sobre': typeof SobreRoute
+  '/turismo': typeof TurismoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/atracoes'
+    | '/configuracoes'
+    | '/desenvolvedores'
+    | '/favoritos'
+    | '/gastronomia'
+    | '/hospedagem'
+    | '/mais'
+    | '/mapa'
+    | '/polos'
+    | '/programacao'
+    | '/sobre'
+    | '/turismo'
+    | '/polo/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/atracoes'
+    | '/configuracoes'
+    | '/desenvolvedores'
+    | '/favoritos'
+    | '/gastronomia'
+    | '/hospedagem'
+    | '/mais'
+    | '/mapa'
+    | '/polos'
+    | '/programacao'
+    | '/sobre'
+    | '/turismo'
+    | '/polo/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/atracoes'
+    | '/configuracoes'
+    | '/desenvolvedores'
+    | '/favoritos'
+    | '/gastronomia'
+    | '/hospedagem'
+    | '/mais'
+    | '/mapa'
+    | '/polos'
+    | '/programacao'
+    | '/sobre'
+    | '/turismo'
+    | '/polo/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtracoesRoute: typeof AtracoesRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  DesenvolvedoresRoute: typeof DesenvolvedoresRoute
+  FavoritosRoute: typeof FavoritosRoute
+  GastronomiaRoute: typeof GastronomiaRoute
+  HospedagemRoute: typeof HospedagemRoute
+  MaisRoute: typeof MaisRoute
+  MapaRoute: typeof MapaRoute
+  PolosRoute: typeof PolosRoute
+  ProgramacaoRoute: typeof ProgramacaoRoute
+  SobreRoute: typeof SobreRoute
+  TurismoRoute: typeof TurismoRoute
+  PoloIdRoute: typeof PoloIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/turismo': {
+      id: '/turismo'
+      path: '/turismo'
+      fullPath: '/turismo'
+      preLoaderRoute: typeof TurismoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programacao': {
+      id: '/programacao'
+      path: '/programacao'
+      fullPath: '/programacao'
+      preLoaderRoute: typeof ProgramacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/polos': {
+      id: '/polos'
+      path: '/polos'
+      fullPath: '/polos'
+      preLoaderRoute: typeof PolosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapa': {
+      id: '/mapa'
+      path: '/mapa'
+      fullPath: '/mapa'
+      preLoaderRoute: typeof MapaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mais': {
+      id: '/mais'
+      path: '/mais'
+      fullPath: '/mais'
+      preLoaderRoute: typeof MaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospedagem': {
+      id: '/hospedagem'
+      path: '/hospedagem'
+      fullPath: '/hospedagem'
+      preLoaderRoute: typeof HospedagemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gastronomia': {
+      id: '/gastronomia'
+      path: '/gastronomia'
+      fullPath: '/gastronomia'
+      preLoaderRoute: typeof GastronomiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/desenvolvedores': {
+      id: '/desenvolvedores'
+      path: '/desenvolvedores'
+      fullPath: '/desenvolvedores'
+      preLoaderRoute: typeof DesenvolvedoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atracoes': {
+      id: '/atracoes'
+      path: '/atracoes'
+      fullPath: '/atracoes'
+      preLoaderRoute: typeof AtracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +305,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/polo/$id': {
+      id: '/polo/$id'
+      path: '/polo/$id'
+      fullPath: '/polo/$id'
+      preLoaderRoute: typeof PoloIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtracoesRoute: AtracoesRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  DesenvolvedoresRoute: DesenvolvedoresRoute,
+  FavoritosRoute: FavoritosRoute,
+  GastronomiaRoute: GastronomiaRoute,
+  HospedagemRoute: HospedagemRoute,
+  MaisRoute: MaisRoute,
+  MapaRoute: MapaRoute,
+  PolosRoute: PolosRoute,
+  ProgramacaoRoute: ProgramacaoRoute,
+  SobreRoute: SobreRoute,
+  TurismoRoute: TurismoRoute,
+  PoloIdRoute: PoloIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
