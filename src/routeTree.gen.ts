@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoloIdRouteImport } from './routes/polo.$id'
 
 const ProgramacaoRoute = ProgramacaoRouteImport.update({
   id: '/programacao',
@@ -28,35 +29,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoloIdRoute = PoloIdRouteImport.update({
+  id: '/polo/$id',
+  path: '/polo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/polos' | '/programacao'
+  fullPaths: '/' | '/polos' | '/programacao' | '/polo/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/polos' | '/programacao'
-  id: '__root__' | '/' | '/polos' | '/programacao'
+  to: '/' | '/polos' | '/programacao' | '/polo/$id'
+  id: '__root__' | '/' | '/polos' | '/programacao' | '/polo/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
+  PoloIdRoute: typeof PoloIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/polo/$id': {
+      id: '/polo/$id'
+      path: '/polo/$id'
+      fullPath: '/polo/$id'
+      preLoaderRoute: typeof PoloIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,7 +106,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
+  PoloIdRoute: PoloIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
