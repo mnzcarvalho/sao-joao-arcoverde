@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TurismoRouteImport } from './routes/turismo'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
 import { Route as MapaRouteImport } from './routes/mapa'
@@ -18,6 +19,11 @@ import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoloIdRouteImport } from './routes/polo.$id'
 
+const TurismoRoute = TurismoRouteImport.update({
+  id: '/turismo',
+  path: '/turismo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramacaoRoute = ProgramacaoRouteImport.update({
   id: '/programacao',
   path: '/programacao',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/turismo': typeof TurismoRoute
   '/polo/$id': typeof PoloIdRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/turismo'
     | '/polo/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/turismo'
     | '/polo/$id'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/polos'
     | '/programacao'
+    | '/turismo'
     | '/polo/$id'
   fileRoutesById: FileRoutesById
 }
@@ -131,11 +143,19 @@ export interface RootRouteChildren {
   MapaRoute: typeof MapaRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
+  TurismoRoute: typeof TurismoRoute
   PoloIdRoute: typeof PoloIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/turismo': {
+      id: '/turismo'
+      path: '/turismo'
+      fullPath: '/turismo'
+      preLoaderRoute: typeof TurismoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programacao': {
       id: '/programacao'
       path: '/programacao'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   MapaRoute: MapaRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
+  TurismoRoute: TurismoRoute,
   PoloIdRoute: PoloIdRoute,
 }
 export const routeTree = rootRouteImport
