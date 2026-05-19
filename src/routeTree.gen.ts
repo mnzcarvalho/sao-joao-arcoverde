@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
 import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoloIdRouteImport } from './routes/polo.$id'
 
@@ -30,6 +31,11 @@ const MapaRoute = MapaRouteImport.update({
   path: '/mapa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtracoesRoute = AtracoesRouteImport.update({
+  id: '/atracoes',
+  path: '/atracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const PoloIdRoute = PoloIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atracoes': typeof AtracoesRoute
   '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
@@ -65,14 +74,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mapa' | '/polos' | '/programacao' | '/polo/$id'
+  fullPaths:
+    | '/'
+    | '/atracoes'
+    | '/mapa'
+    | '/polos'
+    | '/programacao'
+    | '/polo/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mapa' | '/polos' | '/programacao' | '/polo/$id'
-  id: '__root__' | '/' | '/mapa' | '/polos' | '/programacao' | '/polo/$id'
+  to: '/' | '/atracoes' | '/mapa' | '/polos' | '/programacao' | '/polo/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/atracoes'
+    | '/mapa'
+    | '/polos'
+    | '/programacao'
+    | '/polo/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtracoesRoute: typeof AtracoesRoute
   MapaRoute: typeof MapaRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
@@ -102,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atracoes': {
+      id: '/atracoes'
+      path: '/atracoes'
+      fullPath: '/atracoes'
+      preLoaderRoute: typeof AtracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +151,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtracoesRoute: AtracoesRoute,
   MapaRoute: MapaRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
