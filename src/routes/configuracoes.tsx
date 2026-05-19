@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageHeader, PageShell } from "@/components/PageShell";
-import { clearData, loadData, refreshData } from "@/lib/store";
+import { clearAll, reseed } from "@/db/seed";
+import { useSeededAt } from "@/features/historia/hooks/useHistoria";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { Download, Trash2, Wifi, WifiOff } from "lucide-react";
 
 export const Route = createFileRoute("/configuracoes")({
@@ -10,55 +12,70 @@ export const Route = createFileRoute("/configuracoes")({
 });
 
 function Configs() {
-  const [cachedAt, setCachedAt] = useState<string | null>(null);
-  const [online, setOnline] = useState(true);
+  const seededAt = useSeededAt();
+  const online = useOnlineStatus();
+  const [busy, setBusy] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    setCachedAt(loadData().cachedAt);
-    setOnline(navigator.onLine);
-    const on = () => setOnline(true);
-    const off = () => setOnline(false);
-    window.addEventListener("online", on);
-    window.addEventListener("offline", off);
-    return () => { window.removeEventListener("online", on); window.removeEventListener("offline", off); };
-  }, []);
+  const onRefresh = async () => {
+    setBusy(true);
+    try { await reseed(); } finally { setBusy(false); }
+  };
+  const onClear = async () => {
+    setBusy(true);
+    try {
+      await clearAll();
+      await reseed();
+    } finally { setBusy(false); }
+  };
 
   return (
     <PageShell>
       <PageHeader title="Configurações" />
       <div className="space-y-4 px-4">
         <div className="card-tile flex items-center gap-3 p-4">
-          {online ? <Wifi className="h-5 w-5 text-[var(--flag-green)]" /> : <WifiOff className="h-5 w-5 text-muted-foreground" />}
+          {mounted && online ? (
+            <Wifi className="h-5 w-5 text-[var(--flag-green)]" />
+          ) : (
+            <WifiOff className="h-5 w-5 text-muted-foreground" />
+          )}
           <div className="flex-1">
-            <p className="font-semibold">{online ? "Online" : "Offline"}</p>
-            <p className="text-xs text-muted-foreground">O app funciona normalmente nos dois modos.</p>
+            <p className="font-semibold">{mounted && online ? "Online" : "Offline"}</p>
+            <p className="text-xs text-muted-foreground">
+              O app funciona normalmente nos dois modos.
+            </p>
           </div>
         </div>
 
         <div className="card-tile p-4">
-          <p className="font-semibold">Dados em cache</p>
+          <p className="font-semibold">Dados em cache (IndexedDB)</p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Última atualização: {cachedAt ? new Date(cachedAt).toLocaleString("pt-BR") : "—"}
+            Última atualização: {seededAt ? new Date(seededAt).toLocaleString("pt-BR") : "—"}
           </p>
           <div className="mt-3 flex gap-2">
             <button
-              onClick={() => setCachedAt(refreshData().cachedAt)}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground"
+              disabled={busy}
+              onClick={onRefresh}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-foreground disabled:opacity-50"
             >
               <Download className="h-4 w-4" /> Atualizar dados
             </button>
             <button
-              onClick={() => { clearData(); setCachedAt(loadData().cachedAt); }}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-bold"
+              disabled={busy}
+              onClick={onClear}
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-bold disabled:opacity-50"
             >
-              <Trash2 className="h-4 w-4" /> Limpar cache
+              <Trash2 className="h-4 w-4" /> Limpar e re-baixar
             </button>
           </div>
         </div>
 
         <div className="card-tile p-4 text-xs text-muted-foreground">
           <p>São João de Arcoverde · v1.0.0</p>
-          <p className="mt-1">Aplicativo offline-first. Os dados ficam armazenados no seu dispositivo.</p>
+          <p className="mt-1">
+            App offline-first (Dexie/IndexedDB). Os dados ficam no seu dispositivo.
+          </p>
         </div>
       </div>
     </PageShell>
