@@ -13,14 +13,12 @@ import { Route as TurismoRouteImport } from './routes/turismo'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as PolosRouteImport } from './routes/polos'
-import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as MaisRouteImport } from './routes/mais'
 import { Route as HospedagemRouteImport } from './routes/hospedagem'
 import { Route as GastronomiaRouteImport } from './routes/gastronomia'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as DesenvolvedoresRouteImport } from './routes/desenvolvedores'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
-import { Route as AtracoesRouteImport } from './routes/atracoes'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoloIdRouteImport } from './routes/polo.$id'
 
@@ -42,11 +40,6 @@ const ProgramacaoRoute = ProgramacaoRouteImport.update({
 const PolosRoute = PolosRouteImport.update({
   id: '/polos',
   path: '/polos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MapaRoute = MapaRouteImport.update({
-  id: '/mapa',
-  path: '/mapa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MaisRoute = MaisRouteImport.update({
@@ -79,11 +72,6 @@ const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
   path: '/configuracoes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AtracoesRoute = AtracoesRouteImport.update({
-  id: '/atracoes',
-  path: '/atracoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -97,14 +85,12 @@ const PoloIdRoute = PoloIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mais': typeof MaisRoute
-  '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sobre': typeof SobreRoute
@@ -113,14 +99,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mais': typeof MaisRoute
-  '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sobre': typeof SobreRoute
@@ -130,14 +114,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/atracoes': typeof AtracoesRoute
   '/configuracoes': typeof ConfiguracoesRoute
   '/desenvolvedores': typeof DesenvolvedoresRoute
   '/favoritos': typeof FavoritosRoute
   '/gastronomia': typeof GastronomiaRoute
   '/hospedagem': typeof HospedagemRoute
   '/mais': typeof MaisRoute
-  '/mapa': typeof MapaRoute
   '/polos': typeof PolosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sobre': typeof SobreRoute
@@ -148,14 +130,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
     | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mais'
-    | '/mapa'
     | '/polos'
     | '/programacao'
     | '/sobre'
@@ -164,14 +144,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
     | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mais'
-    | '/mapa'
     | '/polos'
     | '/programacao'
     | '/sobre'
@@ -180,14 +158,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/atracoes'
     | '/configuracoes'
     | '/desenvolvedores'
     | '/favoritos'
     | '/gastronomia'
     | '/hospedagem'
     | '/mais'
-    | '/mapa'
     | '/polos'
     | '/programacao'
     | '/sobre'
@@ -197,14 +173,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AtracoesRoute: typeof AtracoesRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   DesenvolvedoresRoute: typeof DesenvolvedoresRoute
   FavoritosRoute: typeof FavoritosRoute
   GastronomiaRoute: typeof GastronomiaRoute
   HospedagemRoute: typeof HospedagemRoute
   MaisRoute: typeof MaisRoute
-  MapaRoute: typeof MapaRoute
   PolosRoute: typeof PolosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
   SobreRoute: typeof SobreRoute
@@ -240,13 +214,6 @@ declare module '@tanstack/react-router' {
       path: '/polos'
       fullPath: '/polos'
       preLoaderRoute: typeof PolosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mapa': {
-      id: '/mapa'
-      path: '/mapa'
-      fullPath: '/mapa'
-      preLoaderRoute: typeof MapaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mais': {
@@ -291,13 +258,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConfiguracoesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/atracoes': {
-      id: '/atracoes'
-      path: '/atracoes'
-      fullPath: '/atracoes'
-      preLoaderRoute: typeof AtracoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -317,14 +277,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AtracoesRoute: AtracoesRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
   DesenvolvedoresRoute: DesenvolvedoresRoute,
   FavoritosRoute: FavoritosRoute,
   GastronomiaRoute: GastronomiaRoute,
   HospedagemRoute: HospedagemRoute,
   MaisRoute: MaisRoute,
-  MapaRoute: MapaRoute,
   PolosRoute: PolosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
   SobreRoute: SobreRoute,

@@ -5,19 +5,17 @@ export const PoloSchema = z.object({
   nome: z.string(),
   descricao: z.string(),
   endereco: z.string(),
-  lat: z.number(),
-  lng: z.number(),
   horario: z.string(),
 });
 export type Polo = z.infer<typeof PoloSchema>;
 
 export const ShowSchema = z.object({
   id: z.string(),
-  data: z.string(), // ISO date YYYY-MM-DD
-  hora: z.string(),
+  data: z.string(), // YYYY-MM-DD
+  hora: z.string().optional().default(""),
   artista: z.string(),
   polo: z.string(),
-  genero: z.string(),
+  genero: z.string().optional().default(""),
 });
 export type Show = z.infer<typeof ShowSchema>;
 
@@ -28,13 +26,13 @@ export const LugarSchema = z.object({
   descricao: z.string(),
   endereco: z.string(),
   contato: z.string().optional(),
-  preco: z.string().optional(),
 });
 export type Lugar = z.infer<typeof LugarSchema>;
 
 export const HistoriaSchema = z.object({
   sobreCidade: z.string(),
   sobreSaoJoao: z.string(),
+  curiosidades: z.array(z.string()).optional().default([]),
 });
 export type Historia = z.infer<typeof HistoriaSchema>;
 
