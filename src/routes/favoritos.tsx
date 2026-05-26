@@ -37,8 +37,8 @@ function Favoritos() {
               <div className="flex-1">
                 <p className="font-display text-base font-semibold">{s.artista}</p>
                 <p className="text-xs text-muted-foreground">
-                  {new Date(s.data + "T12:00:00").toLocaleDateString("pt-BR")} · {s.hora} ·{" "}
-                  {poloName(s.polo)}
+                  {new Date(s.data + "T12:00:00").toLocaleDateString("pt-BR")}
+                  {s.hora ? ` · ${s.hora}` : ""} · {poloName(s.polo)}
                 </p>
               </div>
               <button
