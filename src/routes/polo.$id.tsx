@@ -28,7 +28,7 @@ function PoloDetail() {
   }
   if (polo === null) throw notFound();
 
-  const mapsUrl = `https://www.google.com/maps?q=${polo.lat},${polo.lng}`;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(polo.endereco)}`;
 
   return (
     <PageShell>
@@ -37,10 +37,15 @@ function PoloDetail() {
         <div className="card-tile p-4">
           <p className="text-sm text-foreground/90">{polo.descricao}</p>
           <div className="mt-4 space-y-2 text-sm">
-            <p className="flex items-start gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 text-accent" /> {polo.endereco}
-            </p>
-            <p className="flex items-start gap-2">
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-start gap-2 text-accent underline-offset-2 hover:underline"
+            >
+              <MapPin className="mt-0.5 h-4 w-4" /> {polo.endereco}
+            </a>
+            <p className="flex items-start gap-2 text-muted-foreground">
               <Clock className="mt-0.5 h-4 w-4 text-accent" /> {polo.horario}
             </p>
           </div>
@@ -50,7 +55,7 @@ function PoloDetail() {
             rel="noreferrer"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-[var(--shadow-glow)]"
           >
-            <MapPin className="h-4 w-4" /> Abrir no mapa
+            <MapPin className="h-4 w-4" /> Abrir no Google Maps
           </a>
         </div>
 
@@ -59,17 +64,21 @@ function PoloDetail() {
           <p className="px-1 text-sm text-muted-foreground">Nenhuma atração cadastrada ainda.</p>
         ) : (
           <ul className="space-y-2">
-            {shows.map((s) => (
-              <li key={s.id} className="card-tile flex items-center gap-3 p-3">
-                <Calendar className="h-5 w-5 text-accent" />
-                <div className="flex-1">
-                  <p className="font-semibold">{s.artista}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {new Date(s.data + "T12:00:00").toLocaleDateString("pt-BR")} · {s.hora} · {s.genero}
-                  </p>
-                </div>
-              </li>
-            ))}
+            {shows
+              .sort((a, b) => (a.data + (a.hora ?? "")).localeCompare(b.data + (b.hora ?? "")))
+              .map((s) => (
+                <li key={s.id} className="card-tile flex items-center gap-3 p-3">
+                  <Calendar className="h-5 w-5 text-accent" />
+                  <div className="flex-1">
+                    <p className="font-semibold">{s.artista}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(s.data + "T12:00:00").toLocaleDateString("pt-BR")}
+                      {s.hora ? ` · ${s.hora}` : ""}
+                      {s.genero ? ` · ${s.genero}` : ""}
+                    </p>
+                  </div>
+                </li>
+              ))}
           </ul>
         )}
       </div>

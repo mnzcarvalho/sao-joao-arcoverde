@@ -9,7 +9,7 @@ import { db } from "./database";
 import { metaRepo } from "./repositories/metaRepo";
 import { HistoriaSchema, LugarSchema, PoloSchema, ShowSchema } from "@/types/domain";
 
-const SEED_VERSION = 1;
+const SEED_VERSION = 3;
 const SEED_KEY = "seedVersion";
 
 /**

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, PageShell } from "@/components/PageShell";
-import { BedDouble, Camera, ChevronRight, Code2, Info, Music, Settings, Utensils } from "lucide-react";
+import { BedDouble, Camera, ChevronRight, Code2, Info, Settings, Utensils } from "lucide-react";
 
 export const Route = createFileRoute("/mais")({
   component: Mais,
@@ -8,7 +8,6 @@ export const Route = createFileRoute("/mais")({
 });
 
 const items = [
-  { to: "/atracoes", label: "Atrações", icon: Music },
   { to: "/gastronomia", label: "Onde Comer", icon: Utensils },
   { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble },
   { to: "/turismo", label: "Pontos Turísticos", icon: Camera },
