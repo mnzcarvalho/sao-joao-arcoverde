@@ -164,14 +164,14 @@ function Home() {
         </div>
 
         {/* Título */}
-        <p className="relative mb-1 text-center text-sm font-bold text-yellow-400">São João de</p>
-        <h1 className="relative mb-2 text-center text-4xl font-extrabold leading-none text-glow-intense text-white sm:text-5xl md:text-6xl">
+        <p className="relative mb-1 text-center text-xs font-bold uppercase tracking-[0.35em] text-[color:var(--gold)]">São João de</p>
+        <h1 className="title-glow-festa relative mb-3 text-center text-5xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl md:text-7xl">
           ARCOVERDE
         </h1>
 
-        {/* Slogan em botão gradiente */}
+        {/* Slogan em chip gradiente */}
         <div className="relative mb-4 flex justify-center">
-          <div className="slogan-button rounded-full px-6 py-2.5 font-extrabold text-white shadow-lg">
+          <div className="slogan-chip rounded-full px-6 py-2.5 text-sm font-extrabold uppercase shadow-lg">
             O melhor do Brasil!
           </div>
         </div>
