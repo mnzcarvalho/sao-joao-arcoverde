@@ -12,12 +12,12 @@ export const Route = createFileRoute("/")({
 });
 
 const tiles = [
-  { to: "/programacao", label: "Programação", icon: Calendar, color: "var(--flag-red)" },
-  { to: "/polos", label: "Polos", icon: MapPin, color: "var(--flag-blue)" },
-  { to: "/gastronomia", label: "Onde Comer", icon: Utensils, color: "var(--flag-green)" },
-  { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble, color: "var(--bonfire)" },
-  { to: "/turismo", label: "Turismo", icon: Camera, color: "var(--flag-yellow)" },
-  { to: "/sobre", label: "Sobre", icon: Info, color: "var(--flag-red)" },
+  { to: "/programacao", label: "Programação", icon: Calendar, color: "var(--magenta)" },
+  { to: "/polos", label: "Polos", icon: MapPin, color: "var(--bonfire)" },
+  { to: "/gastronomia", label: "Onde Comer", icon: Utensils, color: "var(--gold)" },
+  { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble, color: "var(--magenta)" },
+  { to: "/turismo", label: "Turismo", icon: Camera, color: "var(--bonfire)" },
+  { to: "/sobre", label: "Sobre", icon: Info, color: "var(--gold)" },
 ] as const;
 
 function Home() {
@@ -164,14 +164,14 @@ function Home() {
         </div>
 
         {/* Título */}
-        <p className="relative mb-1 text-center text-sm font-bold text-yellow-400">São João de</p>
-        <h1 className="relative mb-2 text-center text-4xl font-extrabold leading-none text-glow-intense text-white sm:text-5xl md:text-6xl">
+        <p className="relative mb-1 text-center text-xs font-bold uppercase tracking-[0.35em] text-[color:var(--gold)]">São João de</p>
+        <h1 className="title-glow-festa relative mb-3 text-center text-5xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl md:text-7xl">
           ARCOVERDE
         </h1>
 
-        {/* Slogan em botão gradiente */}
+        {/* Slogan em chip gradiente */}
         <div className="relative mb-4 flex justify-center">
-          <div className="slogan-button rounded-full px-6 py-2.5 font-extrabold text-white shadow-lg">
+          <div className="slogan-chip rounded-full px-6 py-2.5 text-sm font-extrabold uppercase shadow-lg">
             O melhor do Brasil!
           </div>
         </div>
@@ -221,16 +221,16 @@ function Home() {
           <Link
             key={to}
             to={to}
-            className="card-premium group flex flex-col items-center justify-center gap-2 p-3"
+            className="card-premium group flex aspect-square flex-col items-center justify-center gap-2.5 p-3"
             style={{ "--color": color } as React.CSSProperties}
           >
             <div
-              className="icon-badge grid h-12 w-12 place-items-center rounded-2xl"
+              className="icon-badge grid h-14 w-14 place-items-center rounded-2xl"
               style={{ "--color": color } as React.CSSProperties}
             >
-              <Icon className="h-6 w-6" />
+              <Icon className="h-7 w-7" strokeWidth={2.25} />
             </div>
-            <span className="text-center text-xs font-bold uppercase tracking-wide text-foreground">
+            <span className="text-center text-[11px] font-extrabold uppercase tracking-wider text-foreground">
               {label}
             </span>
           </Link>

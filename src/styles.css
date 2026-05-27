@@ -36,6 +36,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-bonfire: var(--bonfire);
+  --color-magenta: var(--magenta);
+  --color-gold: var(--gold);
   --color-flag-red: var(--flag-red);
   --color-flag-yellow: var(--flag-yellow);
   --color-flag-green: var(--flag-green);
@@ -48,44 +50,50 @@
 
 :root {
   --radius: 1rem;
-  /* Night sky deep indigo (matches reference) */
-  --background: oklch(0.18 0.07 285);
-  --surface: oklch(0.22 0.08 285);
-  --surface-2: oklch(0.27 0.09 285);
-  --foreground: oklch(0.98 0.01 90);
+  /* Roxo profundo #14063D */
+  --background: oklch(0.16 0.12 295);
+  --surface: oklch(0.22 0.13 295);
+  --surface-2: oklch(0.28 0.14 295);
+  --foreground: oklch(0.98 0.015 90);
 
-  --card: oklch(0.24 0.08 285);
-  --card-foreground: oklch(0.98 0.01 90);
-  --popover: oklch(0.22 0.08 285);
-  --popover-foreground: oklch(0.98 0.01 90);
+  --card: oklch(0.24 0.13 295);
+  --card-foreground: oklch(0.98 0.015 90);
+  --popover: oklch(0.22 0.13 295);
+  --popover-foreground: oklch(0.98 0.015 90);
 
-  /* Bonfire orange */
-  --primary: oklch(0.74 0.18 55);
-  --primary-foreground: oklch(0.2 0.05 285);
+  /* Laranja #FF7A00 */
+  --primary: oklch(0.72 0.20 50);
+  --primary-foreground: oklch(0.18 0.10 295);
 
-  --secondary: oklch(0.3 0.09 285);
-  --secondary-foreground: oklch(0.98 0.01 90);
-  --muted: oklch(0.28 0.06 285);
-  --muted-foreground: oklch(0.78 0.03 285);
-  --accent: oklch(0.85 0.17 90); /* warm yellow */
-  --accent-foreground: oklch(0.2 0.05 285);
+  --secondary: oklch(0.30 0.13 295);
+  --secondary-foreground: oklch(0.98 0.015 90);
+  --muted: oklch(0.30 0.10 295);
+  --muted-foreground: oklch(0.82 0.04 295);
+  /* Dourado #FFC93C */
+  --accent: oklch(0.86 0.17 90);
+  --accent-foreground: oklch(0.18 0.10 295);
 
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 90);
-  --border: oklch(0.35 0.07 285);
-  --input: oklch(0.3 0.07 285);
-  --ring: oklch(0.74 0.18 55);
+  --destructive: oklch(0.62 0.24 25);
+  --destructive-foreground: oklch(0.98 0.015 90);
+  --border: oklch(0.40 0.12 305);
+  --input: oklch(0.30 0.12 295);
+  --ring: oklch(0.65 0.22 350);
 
-  --bonfire: oklch(0.72 0.2 45);
-  --flag-red: oklch(0.65 0.22 25);
-  --flag-yellow: oklch(0.85 0.17 90);
-  --flag-green: oklch(0.7 0.17 145);
-  --flag-blue: oklch(0.65 0.16 240);
+  --bonfire: oklch(0.72 0.20 50);
+  /* Magenta #D63384 */
+  --magenta: oklch(0.62 0.22 350);
+  --gold: oklch(0.86 0.17 90);
+  --flag-red: oklch(0.65 0.24 25);
+  --flag-yellow: oklch(0.86 0.17 90);
+  --flag-green: oklch(0.72 0.17 145);
+  --flag-blue: oklch(0.66 0.16 240);
 
-  --gradient-night: linear-gradient(180deg, oklch(0.16 0.08 290), oklch(0.24 0.08 285));
-  --gradient-bonfire: linear-gradient(135deg, oklch(0.78 0.19 60), oklch(0.65 0.22 30));
-  --shadow-glow: 0 10px 40px -10px oklch(0.74 0.18 55 / 0.4);
-  --shadow-card: 0 4px 20px -8px oklch(0 0 0 / 0.5);
+  --gradient-night: linear-gradient(180deg, oklch(0.14 0.10 295), oklch(0.22 0.13 295));
+  --gradient-bonfire: linear-gradient(135deg, oklch(0.78 0.19 60), oklch(0.65 0.24 30));
+  --gradient-festa: linear-gradient(135deg, oklch(0.62 0.22 350) 0%, oklch(0.72 0.20 50) 50%, oklch(0.86 0.17 90) 100%);
+  --gradient-magenta-orange: linear-gradient(135deg, oklch(0.62 0.22 350), oklch(0.72 0.20 50));
+  --shadow-glow: 0 10px 40px -10px oklch(0.62 0.22 350 / 0.5);
+  --shadow-card: 0 4px 20px -8px oklch(0 0 0 / 0.55);
 }
 
 .dark {
@@ -138,18 +146,25 @@
     box-shadow: var(--shadow-card);
   }
   .card-premium {
-    background: linear-gradient(145deg, var(--surface) 0%, var(--surface-2) 100%);
-    border: 1px solid var(--border);
+    position: relative;
+    background:
+      linear-gradient(145deg, color-mix(in oklab, var(--color) 18%, var(--surface)) 0%, var(--surface-2) 100%);
+    border: 1px solid color-mix(in oklab, var(--color) 35%, transparent);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-card), 0 8px 32px -12px oklch(0 0 0 / 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:
+      var(--shadow-card),
+      inset 0 1px 0 oklch(1 0 0 / 0.08),
+      0 0 0 0 color-mix(in oklab, var(--color) 0%, transparent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .card-premium:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px -12px oklch(0 0 0 / 0.5), 0 0 24px -8px color-mix(in oklab, var(--color) 20%, transparent);
+    transform: translateY(-3px);
+    box-shadow:
+      0 16px 40px -12px oklch(0 0 0 / 0.55),
+      0 0 24px -4px color-mix(in oklab, var(--color) 55%, transparent);
   }
   .card-premium:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(0) scale(0.97);
   }
   .ribbon {
     background: var(--gradient-bonfire);
@@ -208,13 +223,39 @@
     background-repeat: repeat-x;
   }
   .icon-badge {
-    background: linear-gradient(135deg, color-mix(in oklab, var(--color) 30%, transparent) 0%, color-mix(in oklab, var(--color) 15%, transparent) 100%);
-    color: var(--color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(135deg, var(--color) 0%, color-mix(in oklab, var(--color) 60%, var(--magenta)) 100%);
+    color: oklch(0.99 0.01 90);
+    box-shadow:
+      0 8px 20px -8px color-mix(in oklab, var(--color) 70%, transparent),
+      inset 0 1px 0 oklch(1 0 0 / 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .icon-badge:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px -8px color-mix(in oklab, var(--color) 40%, transparent);
+    transform: scale(1.08);
+    box-shadow:
+      0 10px 28px -6px color-mix(in oklab, var(--color) 80%, transparent),
+      inset 0 1px 0 oklch(1 0 0 / 0.3);
+  }
+  .slogan-chip {
+    background: var(--gradient-festa);
+    color: oklch(0.18 0.10 295);
+    box-shadow:
+      0 6px 24px -6px oklch(0.62 0.22 350 / 0.55),
+      0 0 32px -10px oklch(0.86 0.17 90 / 0.5),
+      inset 0 1px 0 oklch(1 0 0 / 0.4);
+    letter-spacing: 0.06em;
+  }
+  .nav-active-pill {
+    background: var(--gradient-magenta-orange);
+    box-shadow:
+      0 6px 18px -6px oklch(0.62 0.22 350 / 0.6),
+      inset 0 1px 0 oklch(1 0 0 / 0.3);
+  }
+  .title-glow-festa {
+    text-shadow:
+      0 0 22px oklch(0.62 0.22 350 / 0.55),
+      0 0 48px oklch(0.72 0.20 50 / 0.35),
+      0 2px 0 oklch(0.16 0.12 295 / 0.6);
   }
   .fire-glow {
     filter: drop-shadow(0 0 12px oklch(0.72 0.2 45 / 0.6)) drop-shadow(0 0 24px oklch(0.72 0.2 45 / 0.3));
@@ -230,13 +271,14 @@
     filter: drop-shadow(0 4px 8px oklch(0 0 0 / 0.4));
   }
   .slogan-button {
-    background: linear-gradient(135deg, oklch(0.72 0.20 45) 0%, oklch(0.82 0.18 60) 50%, oklch(0.88 0.16 90) 100%);
-    box-shadow: 0 4px 20px -4px oklch(0.72 0.20 45 / 0.6), 0 0 32px -8px oklch(0.82 0.18 60 / 0.4);
+    background: var(--gradient-festa);
+    color: oklch(0.18 0.10 295);
+    box-shadow: 0 6px 24px -6px oklch(0.62 0.22 350 / 0.55), 0 0 32px -10px oklch(0.86 0.17 90 / 0.5);
   }
   .date-badge {
-    background: linear-gradient(135deg, oklch(0.25 0.08 285) 0%, oklch(0.20 0.07 285) 100%);
-    border: 1px solid oklch(0.40 0.08 285 / 0.4);
-    box-shadow: 0 4px 16px -4px oklch(0 0 0 / 0.5), inset 0 1px 0 oklch(1 0 0 / 0.1);
+    background: linear-gradient(135deg, oklch(0.22 0.13 295) 0%, oklch(0.28 0.14 295) 100%);
+    border: 1px solid color-mix(in oklab, var(--magenta) 40%, transparent);
+    box-shadow: 0 4px 16px -4px oklch(0.62 0.22 350 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.12);
   }
 }
 
