@@ -1,11 +1,20 @@
-import { useLiveQuery } from "dexie-react-hooks";
+import { useEffect, useState } from "react";
 import { polosRepo } from "@/db/repositories/polosRepo";
 import type { Polo } from "@/types/domain";
 
 export function usePolos(): Polo[] {
-  return useLiveQuery(() => polosRepo.list(), [], []) ?? [];
+  const [data, setData] = useState<Polo[]>([]);
+  useEffect(() => {
+    polosRepo.list().then(setData).catch(() => setData([]));
+  }, []);
+  return data;
 }
 
 export function usePolo(id: string | undefined): Polo | undefined {
-  return useLiveQuery(async () => (id ? await polosRepo.get(id) : undefined), [id]);
+  const [data, setData] = useState<Polo | undefined>(undefined);
+  useEffect(() => {
+    if (!id) { setData(undefined); return; }
+    polosRepo.get(id).then(setData).catch(() => setData(undefined));
+  }, [id]);
+  return data;
 }

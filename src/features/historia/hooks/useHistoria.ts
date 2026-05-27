@@ -1,11 +1,19 @@
-import { useLiveQuery } from "dexie-react-hooks";
+import { useEffect, useState } from "react";
 import { metaRepo } from "@/db/repositories/metaRepo";
 import type { Historia } from "@/types/domain";
 
 export function useHistoria(): Historia | undefined {
-  return useLiveQuery(() => metaRepo.get<Historia>("historia"), []);
+  const [data, setData] = useState<Historia | undefined>(undefined);
+  useEffect(() => {
+    metaRepo.get<Historia>("historia").then(setData).catch(() => setData(undefined));
+  }, []);
+  return data;
 }
 
 export function useSeededAt(): string | undefined {
-  return useLiveQuery(() => metaRepo.get<string>("seededAt"), []);
+  const [data, setData] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    metaRepo.get<string>("seededAt").then(setData).catch(() => setData(undefined));
+  }, []);
+  return data;
 }

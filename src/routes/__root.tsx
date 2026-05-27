@@ -7,7 +7,7 @@ import {
   Scripts,
   Link,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
 import { BottomNav } from "@/components/BottomNav";
@@ -105,13 +105,29 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [dbReady, setDbReady] = useState(false);
 
   useEffect(() => {
-    // Seed IndexedDB on first run (idempotent).
-    seedIfNeeded().catch((err) => console.error("[db] seed failed", err));
-    // Register PWA service worker (guards preview/iframe internally).
+    let cancelled = false;
+    seedIfNeeded()
+      .then(() => {
+        if (!cancelled) setDbReady(true);
+      })
+      .catch((err) => {
+        console.error("[db] seed failed", err);
+        setDbReady(true);
+      });
     registerServiceWorker();
+    return () => { cancelled = true; };
   }, []);
+
+  if (!dbReady) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <p className="text-sm text-muted-foreground animate-pulse">Carregando…</p>
+      </div>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

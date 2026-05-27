@@ -68,7 +68,9 @@ function Programacao() {
         </div>
       </div>
 
-      {porDia.length === 0 ? (
+      {!polos.length && !programacao.length ? (
+        <p className="px-4 text-sm text-muted-foreground">Carregando programação…</p>
+      ) : porDia.length === 0 ? (
         <p className="px-4 text-sm text-muted-foreground">Programação em breve.</p>
       ) : (
         <div className="space-y-5 px-4">

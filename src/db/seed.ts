@@ -7,25 +7,45 @@ import historiaJson from "@/data/historia.json";
 
 import { db } from "./database";
 import { metaRepo } from "./repositories/metaRepo";
+import { z } from "zod";
 import { HistoriaSchema, LugarSchema, PoloSchema, ShowSchema } from "@/types/domain";
 
-const SEED_VERSION = 3;
+function safeParse<T>(schema: z.ZodSchema<T>, items: unknown[], label: string): T[] {
+  return items
+    .map((item, i) => {
+      const result = schema.safeParse(item);
+      if (!result.success) {
+        console.warn(`[seed] ${label}[${i}] invalid, skipping:`, result.error.issues);
+        return null;
+      }
+      return result.data;
+    })
+    .filter(Boolean) as T[];
+}
+
+const SEED_VERSION = 5;
 const SEED_KEY = "seedVersion";
 
 /**
  * Seeds bundled JSON into IndexedDB on first run (or when SEED_VERSION bumps).
- * Validates each record with Zod before insertion.
+ * Validates each record with Zod before insertion. Invalid records are skipped.
  */
 export async function seedIfNeeded(): Promise<void> {
   const current = await metaRepo.get<number>(SEED_KEY);
   if (current === SEED_VERSION) return;
 
-  const polos = polosJson.map((p) => PoloSchema.parse(p));
-  const programacao = programacaoJson.map((s) => ShowSchema.parse(s));
-  const gastronomia = gastronomiaJson.map((l) => LugarSchema.parse(l));
-  const hospedagem = hospedagemJson.map((l) => LugarSchema.parse(l));
-  const turismo = turismoJson.map((l) => LugarSchema.parse(l));
-  const historia = HistoriaSchema.parse(historiaJson);
+  const polos = safeParse(PoloSchema, polosJson, "polos");
+  const programacao = safeParse(ShowSchema, programacaoJson, "programacao");
+  const gastronomia = safeParse(LugarSchema, gastronomiaJson, "gastronomia");
+  const hospedagem = safeParse(LugarSchema, hospedagemJson, "hospedagem");
+  const turismo = safeParse(LugarSchema, turismoJson, "turismo");
+
+  let historia: z.infer<typeof HistoriaSchema> = { sobreCidade: "", sobreSaoJoao: "" };
+  try {
+    historia = HistoriaSchema.parse(historiaJson);
+  } catch (e) {
+    console.warn("[seed] historia invalid, using defaults:", e);
+  }
 
   await db.transaction(
     "rw",

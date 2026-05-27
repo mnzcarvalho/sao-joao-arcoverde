@@ -1,15 +1,20 @@
-import { useLiveQuery } from "dexie-react-hooks";
+import { useEffect, useState } from "react";
 import { programacaoRepo } from "@/db/repositories/programacaoRepo";
 import type { Show } from "@/types/domain";
 
 export function useProgramacao(): Show[] {
-  return useLiveQuery(() => programacaoRepo.list(), [], []) ?? [];
+  const [data, setData] = useState<Show[]>([]);
+  useEffect(() => {
+    programacaoRepo.list().then(setData).catch(() => setData([]));
+  }, []);
+  return data;
 }
 
 export function useProgramacaoPorPolo(poloId: string | undefined): Show[] {
-  return useLiveQuery(
-    () => (poloId ? programacaoRepo.byPolo(poloId) : Promise.resolve([])),
-    [poloId],
-    []
-  ) ?? [];
+  const [data, setData] = useState<Show[]>([]);
+  useEffect(() => {
+    if (!poloId) { setData([]); return; }
+    programacaoRepo.byPolo(poloId).then(setData).catch(() => setData([]));
+  }, [poloId]);
+  return data;
 }
