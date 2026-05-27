@@ -271,13 +271,14 @@
     filter: drop-shadow(0 4px 8px oklch(0 0 0 / 0.4));
   }
   .slogan-button {
-    background: linear-gradient(135deg, oklch(0.72 0.20 45) 0%, oklch(0.82 0.18 60) 50%, oklch(0.88 0.16 90) 100%);
-    box-shadow: 0 4px 20px -4px oklch(0.72 0.20 45 / 0.6), 0 0 32px -8px oklch(0.82 0.18 60 / 0.4);
+    background: var(--gradient-festa);
+    color: oklch(0.18 0.10 295);
+    box-shadow: 0 6px 24px -6px oklch(0.62 0.22 350 / 0.55), 0 0 32px -10px oklch(0.86 0.17 90 / 0.5);
   }
   .date-badge {
-    background: linear-gradient(135deg, oklch(0.25 0.08 285) 0%, oklch(0.20 0.07 285) 100%);
-    border: 1px solid oklch(0.40 0.08 285 / 0.4);
-    box-shadow: 0 4px 16px -4px oklch(0 0 0 / 0.5), inset 0 1px 0 oklch(1 0 0 / 0.1);
+    background: linear-gradient(135deg, oklch(0.22 0.13 295) 0%, oklch(0.28 0.14 295) 100%);
+    border: 1px solid color-mix(in oklab, var(--magenta) 40%, transparent);
+    box-shadow: 0 4px 16px -4px oklch(0.62 0.22 350 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.12);
   }
 }
 
