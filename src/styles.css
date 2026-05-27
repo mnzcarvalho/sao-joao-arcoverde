@@ -36,6 +36,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-bonfire: var(--bonfire);
+  --color-magenta: var(--magenta);
+  --color-gold: var(--gold);
   --color-flag-red: var(--flag-red);
   --color-flag-yellow: var(--flag-yellow);
   --color-flag-green: var(--flag-green);
