@@ -12,12 +12,12 @@ export const Route = createFileRoute("/")({
 });
 
 const tiles = [
-  { to: "/programacao", label: "Programação", icon: Calendar, color: "var(--flag-red)" },
-  { to: "/polos", label: "Polos", icon: MapPin, color: "var(--flag-blue)" },
-  { to: "/gastronomia", label: "Onde Comer", icon: Utensils, color: "var(--flag-green)" },
-  { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble, color: "var(--bonfire)" },
-  { to: "/turismo", label: "Turismo", icon: Camera, color: "var(--flag-yellow)" },
-  { to: "/sobre", label: "Sobre", icon: Info, color: "var(--flag-red)" },
+  { to: "/programacao", label: "Programação", icon: Calendar, color: "var(--magenta)" },
+  { to: "/polos", label: "Polos", icon: MapPin, color: "var(--bonfire)" },
+  { to: "/gastronomia", label: "Onde Comer", icon: Utensils, color: "var(--gold)" },
+  { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble, color: "var(--magenta)" },
+  { to: "/turismo", label: "Turismo", icon: Camera, color: "var(--bonfire)" },
+  { to: "/sobre", label: "Sobre", icon: Info, color: "var(--gold)" },
 ] as const;
 
 function Home() {
