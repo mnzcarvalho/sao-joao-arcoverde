@@ -40,7 +40,7 @@ export async function seedIfNeeded(): Promise<void> {
   const hospedagem = safeParse(LugarSchema, hospedagemJson, "hospedagem");
   const turismo = safeParse(LugarSchema, turismoJson, "turismo");
 
-  let historia: z.infer<typeof HistoriaSchema> = { sobreCidade: "", sobreSaoJoao: "" };
+  let historia: z.infer<typeof HistoriaSchema> = { sobreCidade: "", sobreSaoJoao: "", curiosidades: [] };
   try {
     historia = HistoriaSchema.parse(historiaJson);
   } catch (e) {
