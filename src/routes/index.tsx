@@ -221,16 +221,16 @@ function Home() {
           <Link
             key={to}
             to={to}
-            className="card-premium group flex flex-col items-center justify-center gap-2 p-3"
+            className="card-premium group flex aspect-square flex-col items-center justify-center gap-2.5 p-3"
             style={{ "--color": color } as React.CSSProperties}
           >
             <div
-              className="icon-badge grid h-12 w-12 place-items-center rounded-2xl"
+              className="icon-badge grid h-14 w-14 place-items-center rounded-2xl"
               style={{ "--color": color } as React.CSSProperties}
             >
-              <Icon className="h-6 w-6" />
+              <Icon className="h-7 w-7" strokeWidth={2.25} />
             </div>
-            <span className="text-center text-xs font-bold uppercase tracking-wide text-foreground">
+            <span className="text-center text-[11px] font-extrabold uppercase tracking-wider text-foreground">
               {label}
             </span>
           </Link>
