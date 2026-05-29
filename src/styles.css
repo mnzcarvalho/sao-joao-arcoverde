@@ -280,6 +280,55 @@
     border: 1px solid color-mix(in oklab, var(--magenta) 40%, transparent);
     box-shadow: 0 4px 16px -4px oklch(0.62 0.22 350 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.12);
   }
+  .bg-cream {
+    background: linear-gradient(180deg, oklch(0.97 0.02 75) 0%, oklch(0.94 0.03 70) 100%);
+  }
+  .text-on-cream {
+    color: oklch(0.22 0.08 295);
+  }
+  .muted-on-cream {
+    color: oklch(0.45 0.05 295);
+  }
+  .hero-night {
+    background:
+      radial-gradient(ellipse at 80% 10%, oklch(0.32 0.14 320 / 0.55), transparent 60%),
+      radial-gradient(ellipse at 10% 90%, oklch(0.28 0.12 280 / 0.55), transparent 60%),
+      linear-gradient(180deg, oklch(0.18 0.12 295) 0%, oklch(0.14 0.10 295) 100%);
+  }
+  .card-night {
+    background: linear-gradient(160deg, oklch(0.22 0.13 295) 0%, oklch(0.17 0.11 295) 100%);
+    border: 1px solid color-mix(in oklab, var(--magenta) 25%, transparent);
+    border-radius: 1.5rem;
+    box-shadow: 0 16px 40px -16px oklch(0 0 0 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.08);
+  }
+  .tile-light {
+    background: #ffffff;
+    border-radius: 1.25rem;
+    box-shadow: 0 6px 18px -8px oklch(0 0 0 / 0.18), 0 1px 0 oklch(0 0 0 / 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tile-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -10px oklch(0 0 0 / 0.25);
+  }
+  .show-date-chip {
+    background: var(--gold);
+    color: oklch(0.18 0.10 295);
+    border-radius: 0.75rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 6px 14px -6px oklch(0.86 0.17 90 / 0.6);
+  }
+  .cta-festa {
+    background: var(--gradient-magenta-orange);
+    color: oklch(0.99 0.01 90);
+    box-shadow: 0 8px 22px -8px oklch(0.62 0.22 350 / 0.6), inset 0 1px 0 oklch(1 0 0 / 0.25);
+  }
+  .cta-gold {
+    background: linear-gradient(135deg, var(--gold), oklch(0.78 0.18 70));
+    color: oklch(0.18 0.10 295);
+    box-shadow: 0 8px 22px -8px oklch(0.86 0.17 90 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.3);
+  }
 }
 
 @keyframes flicker {
