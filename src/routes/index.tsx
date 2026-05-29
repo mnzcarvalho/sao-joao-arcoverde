@@ -1,243 +1,362 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, MapPin, Utensils, BedDouble, Camera, Info, Sparkles } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Utensils,
+  BedDouble,
+  Camera,
+  Info,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Music,
+  Flame,
+  Sparkles,
+  Heart,
+} from "lucide-react";
+import { useMemo, useRef } from "react";
+import heroTitle from "@/assets/hero-title.png";
+import igreja from "@/assets/igreja.png";
+import sanfoneiro from "@/assets/sanfoneiro.png";
+import casalDancando from "@/assets/casal-dancando.png";
+import mapaPernambuco from "@/assets/mapa-pernambuco.png";
+import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
+import { usePolos } from "@/features/polos/hooks/usePolos";
+import type { Show } from "@/types/domain";
 
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "São João de Arcoverde — Início" },
-      { name: "description", content: "Boas-vindas ao maior São João do sertão pernambucano." },
+      { title: "São João de Arcoverde — O melhor do Brasil" },
+      { name: "description", content: "Tradição, cultura e alegria no maior São João do sertão pernambucano. 13 a 28 de junho de 2026." },
     ],
   }),
 });
 
 const tiles = [
-  { to: "/programacao", label: "Programação", icon: Calendar, color: "var(--magenta)" },
-  { to: "/polos", label: "Polos", icon: MapPin, color: "var(--bonfire)" },
-  { to: "/gastronomia", label: "Onde Comer", icon: Utensils, color: "var(--gold)" },
-  { to: "/hospedagem", label: "Onde Ficar", icon: BedDouble, color: "var(--magenta)" },
-  { to: "/turismo", label: "Turismo", icon: Camera, color: "var(--bonfire)" },
-  { to: "/sobre", label: "Sobre", icon: Info, color: "var(--gold)" },
+  {
+    to: "/programacao",
+    label: "Programação",
+    desc: "Confira os shows, datas e horários.",
+    icon: Calendar,
+    color: "var(--magenta)",
+  },
+  {
+    to: "/polos",
+    label: "Polos",
+    desc: "Conheça os polos e suas atrações.",
+    icon: MapPin,
+    color: "var(--bonfire)",
+  },
+  {
+    to: "/gastronomia",
+    label: "Onde Comer",
+    desc: "Descubra os melhores sabores do São João.",
+    icon: Utensils,
+    color: "var(--gold)",
+  },
+  {
+    to: "/hospedagem",
+    label: "Onde Ficar",
+    desc: "Encontre hospedagens perto de você.",
+    icon: BedDouble,
+    color: "var(--magenta)",
+  },
+  {
+    to: "/turismo",
+    label: "Turismo",
+    desc: "Explore Arcoverde e seus encantos.",
+    icon: Camera,
+    color: "oklch(0.65 0.17 165)",
+  },
+  {
+    to: "/sobre",
+    label: "Sobre",
+    desc: "História, cultura e tradição.",
+    icon: Info,
+    color: "oklch(0.66 0.16 240)",
+  },
 ] as const;
 
+const features = [
+  { icon: Music, title: "Música ao vivo", desc: "Todos os dias", color: "var(--magenta)" },
+  { icon: Flame, title: "Cultura e tradição", desc: "Raízes que encantam", color: "var(--bonfire)" },
+  { icon: Sparkles, title: "Ambiente familiar", desc: "Diversão para todos", color: "var(--gold)" },
+  { icon: Heart, title: "Hospitalidade", desc: "O melhor do Brasil!", color: "oklch(0.66 0.22 25)" },
+];
+
+function formatDay(iso: string) {
+  const [, m, d] = iso.split("-");
+  const months = ["", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+  return { dia: d, mes: months[Number(m)] ?? "" };
+}
+
 function Home() {
+  const shows = useProgramacao();
+  const polos = usePolos();
+  const poloNome = useMemo(() => {
+    const map = new Map<string, string>();
+    polos.forEach((p) => map.set(p.id, p.nome));
+    return map;
+  }, [polos]);
+
+  const destaques: Show[] = useMemo(() => {
+    return [...shows]
+      .sort((a, b) => a.data.localeCompare(b.data))
+      .slice(0, 8);
+  }, [shows]);
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    carouselRef.current?.scrollBy({ left: dir * 220, behavior: "smooth" });
+  };
+
   return (
-    <main className="mx-auto flex min-h-screen max-w-xl flex-col pb-24">
-      <div className="bunting-elegant stars-bg" aria-hidden />
+    <main className="mx-auto min-h-screen max-w-xl pb-28">
+      {/* ============ HERO ============ */}
+      <section className="hero-night relative overflow-hidden px-5 pt-3 pb-6">
+        {/* bandeirinhas no topo */}
+        <div className="bunting-elegant -mx-5 mb-3" aria-hidden />
 
-      {/* Hero com ilustrações SVG detalhadas */}
-      <section className="purple-gradient-hero relative px-6 pt-6">
-        {/* Fogos de artifício sutis no fundo */}
-        <div className="absolute inset-0 overflow-hidden" aria-hidden>
-          {/* Fogo 1 - canto superior esquerdo */}
-          <svg className="firework-burst absolute top-6 left-8 h-12 w-12 text-yellow-300" viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="2" fill="currentColor" />
-            <line x1="20" y1="20" x2="20" y2="8" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="20" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="8" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="32" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="12" y2="12" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-            <line x1="20" y1="20" x2="28" y2="28" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-            <line x1="20" y1="20" x2="28" y2="12" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-            <line x1="20" y1="20" x2="12" y2="28" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-          </svg>
-          
-          {/* Fogo 2 - canto superior direito */}
-          <svg className="firework-burst-delayed absolute top-8 right-10 h-10 w-10 text-orange-300" viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="1.5" fill="currentColor" />
-            <line x1="20" y1="20" x2="20" y2="6" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="20" y2="34" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="6" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="34" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.8" />
-            <line x1="20" y1="20" x2="10" y2="10" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-            <line x1="20" y1="20" x2="30" y2="30" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-          </svg>
+        {/* fogos sutis */}
+        <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
+          <div className="absolute top-10 right-6 h-2 w-2 rounded-full bg-[color:var(--gold)] animate-sparkle" />
+          <div className="absolute top-24 right-16 h-1.5 w-1.5 rounded-full bg-[color:var(--magenta)] animate-sparkle" style={{ animationDelay: "0.6s" }} />
+          <div className="absolute top-32 left-8 h-1.5 w-1.5 rounded-full bg-[color:var(--gold)] animate-sparkle" style={{ animationDelay: "1.1s" }} />
         </div>
 
-        {/* Fogueira detalhada central */}
-        <div className="relative mx-auto mb-4 flex justify-center" aria-hidden>
-          <svg className="fire-detailed animate-fire-flame h-16 w-16 sm:h-20 sm:w-20" viewBox="0 0 64 64" fill="none">
-            {/* Madeiras cruzadas */}
-            <line x1="12" y1="56" x2="48" y2="36" stroke="#8B4513" strokeWidth="5" strokeLinecap="round" />
-            <line x1="48" y1="56" x2="12" y2="36" stroke="#8B4513" strokeWidth="5" strokeLinecap="round" />
-            <line x1="18" y1="54" x2="42" y2="40" stroke="#A0522D" strokeWidth="3" strokeLinecap="round" />
-            
-            {/* Brasa brilhante */}
-            <ellipse cx="32" cy="52" rx="10" ry="4" fill="#FF4500" opacity="0.85" />
-            <ellipse cx="32" cy="51" rx="6" ry="2.5" fill="#FF6347" opacity="0.6" />
-            
-            {/* Chamas internas (vermelho) */}
-            <path d="M26 50 Q32 36 38 50 Q32 54 26 50" fill="#DC143C" opacity="0.9">
-              <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                values="M26 50 Q32 36 38 50 Q32 54 26 50;
-                        M26 49 Q32 34 38 49 Q32 53 26 49;
-                        M26 50 Q32 36 38 50 Q32 54 26 50" />
-            </path>
-            
-            {/* Chamas médias (laranja) */}
-            <path d="M24 48 Q32 32 40 48 Q32 52 24 48" fill="#FF6347">
-              <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                values="M24 48 Q32 32 40 48 Q32 52 24 48;
-                        M24 47 Q32 30 40 47 Q32 51 24 47;
-                        M24 48 Q32 32 40 48 Q32 52 24 48" />
-            </path>
-            
-            {/* Chamas externas (laranja vivo) */}
-            <path d="M22 46 Q32 28 42 46 Q32 50 22 46" fill="#FF4500">
-              <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                values="M22 46 Q32 28 42 46 Q32 50 22 46;
-                        M22 45 Q32 26 42 45 Q32 49 22 45;
-                        M22 46 Q32 28 42 46 Q32 50 22 46" />
-            </path>
-            
-            {/* Chamas externas (amarelo) */}
-            <path d="M20 44 Q32 24 44 44 Q32 48 20 44" fill="#FFA500">
-              <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                values="M20 44 Q32 24 44 44 Q32 48 20 44;
-                        M20 43 Q32 22 44 43 Q32 47 20 43;
-                        M20 44 Q32 24 44 44 Q32 48 20 44" />
-            </path>
-            
-            {/* Chamas externas (amarelo brilhante) */}
-            <path d="M18 42 Q32 20 46 42 Q32 46 18 42" fill="#FFD700" opacity="0.8">
-              <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                values="M18 42 Q32 20 46 42 Q32 46 18 42;
-                        M18 41 Q32 18 46 41 Q32 45 18 41;
-                        M18 42 Q32 20 46 42 Q32 46 18 42" />
-            </path>
-            
-            {/* Faíscas subindo */}
-            <circle cx="30" cy="32" r="1.2" fill="#FFD700" className="animate-ember" style={{ animationDelay: '0s' }} />
-            <circle cx="34" cy="30" r="1" fill="#FFA500" className="animate-ember" style={{ animationDelay: '0.5s' }} />
-            <circle cx="28" cy="34" r="0.8" fill="#FF6347" className="animate-ember" style={{ animationDelay: '1s' }} />
-            <circle cx="36" cy="28" r="1" fill="#FFD700" className="animate-ember" style={{ animationDelay: '0.7s' }} />
-            <circle cx="32" cy="26" r="0.8" fill="#FFA500" className="animate-ember" style={{ animationDelay: '1.2s' }} />
-            <circle cx="31" cy="33" r="0.6" fill="#FFD700" className="animate-ember" style={{ animationDelay: '0.3s' }} />
-            <circle cx="35" cy="31" r="0.7" fill="#FF6347" className="animate-ember" style={{ animationDelay: '0.9s' }} />
-          </svg>
+        {/* logo título + ilustrações lado a lado */}
+        <div className="relative grid grid-cols-[1.05fr_0.95fr] items-end gap-2">
+          <div className="pt-1">
+            <img
+              src={heroTitle}
+              alt="São João de Arcoverde — O melhor do Brasil"
+              className="w-full max-w-[240px] drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
+            />
+          </div>
+          <div className="relative h-[180px]">
+            <img
+              src={igreja}
+              alt=""
+              aria-hidden
+              className="absolute right-0 top-0 h-[140px] w-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.45)]"
+            />
+            <img
+              src={sanfoneiro}
+              alt=""
+              aria-hidden
+              className="absolute -bottom-2 left-0 h-[130px] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+            />
+            <img
+              src={casalDancando}
+              alt=""
+              aria-hidden
+              className="absolute -bottom-2 right-1 h-[110px] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+            />
+          </div>
         </div>
 
-        {/* Cactos do sertão */}
-        <div className="absolute top-36 left-3 sm:left-5" aria-hidden>
-          <svg className="cactus-sertao h-12 w-12 text-green-700" viewBox="0 0 40 60" fill="currentColor">
-            {/* Tronco principal */}
-            <rect x="12" y="18" width="14" height="38" rx="7" />
-            {/* Braço esquerdo */}
-            <path d="M12 32 Q2 32 2 24 Q2 18 8 18" strokeWidth="9" stroke="currentColor" fill="none" strokeLinecap="round" />
-            {/* Braço direito */}
-            <path d="M28 28 Q38 28 38 20 Q38 16 34 16" strokeWidth="9" stroke="currentColor" fill="none" strokeLinecap="round" />
-            {/* Espinhos (pontos sutis) */}
-            <circle cx="16" cy="24" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="20" cy="28" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="18" cy="34" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="24" cy="26" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="22" cy="32" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="17" cy="38" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="25" cy="30" r="0.5" fill="white" opacity="0.3" />
-            <circle cx="21" cy="36" r="0.5" fill="white" opacity="0.3" />
-          </svg>
-        </div>
-        
-        <div className="absolute top-40 right-3 sm:right-5" aria-hidden>
-          <svg className="cactus-sertao h-10 w-10 text-green-700" viewBox="0 0 40 60" fill="currentColor">
-            {/* Tronco principal */}
-            <rect x="12" y="20" width="13" height="35" rx="6.5" />
-            {/* Braço esquerdo */}
-            <path d="M12 30 Q4 30 4 24 Q4 20 7 20" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
-            {/* Braço direito */}
-            <path d="M27 27 Q36 27 36 21 Q36 18 33 18" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
-            {/* Espinhos */}
-            <circle cx="15" cy="25" r="0.4" fill="white" opacity="0.3" />
-            <circle cx="19" cy="29" r="0.4" fill="white" opacity="0.3" />
-            <circle cx="17" cy="35" r="0.4" fill="white" opacity="0.3" />
-            <circle cx="23" cy="27" r="0.4" fill="white" opacity="0.3" />
-            <circle cx="21" cy="33" r="0.4" fill="white" opacity="0.3" />
-          </svg>
-        </div>
+        {/* descrição + badge + CTA */}
+        <div className="relative mt-3 space-y-3">
+          <p className="text-[13px] leading-relaxed text-[color:var(--foreground)]/85">
+            Tradição, cultura e alegria que encantam gerações. Venha viver o São João mais autêntico do país!
+          </p>
 
-        {/* Badge de data moderno */}
-        <div className="relative mx-auto mb-3 flex justify-center">
-          <div className="date-badge inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-semibold text-yellow-300 shadow-lg">
-            <Sparkles className="h-4 w-4 animate-sparkle" />
+          <div className="date-badge inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-bold text-[color:var(--gold)]">
+            <Calendar className="h-4 w-4" />
             13 a 28 de junho · 2026
           </div>
-        </div>
 
-        {/* Título */}
-        <p className="relative mb-1 text-center text-xs font-bold uppercase tracking-[0.35em] text-[color:var(--gold)]">São João de</p>
-        <h1 className="title-glow-festa relative mb-3 text-center text-5xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl md:text-7xl">
-          ARCOVERDE
-        </h1>
-
-        {/* Slogan em chip gradiente */}
-        <div className="relative mb-4 flex justify-center">
-          <div className="slogan-chip rounded-full px-6 py-2.5 text-sm font-extrabold uppercase shadow-lg">
-            O melhor do Brasil!
+          <div>
+            <Link
+              to="/programacao"
+              className="cta-festa inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-extrabold uppercase tracking-wide"
+            >
+              Veja a programação completa
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
-
-        {/* Igreja colonial detalhada */}
-        <div className="relative mx-auto church-silhouette" aria-hidden>
-          <svg className="h-16 w-16 sm:h-20 sm:w-20 text-purple-200" viewBox="0 0 80 80" fill="currentColor">
-            {/* Torre esquerda */}
-            <rect x="12" y="32" width="14" height="32" rx="1" />
-            <rect x="15" y="42" width="3" height="6" rx="1.5" fill="#14063D" />
-            <circle cx="19" cy="30" r="2.5" fill="#14063D" opacity="0.7" />
-            <rect x="13" y="26" width="12" height="4" rx="1" fill="#14063D" opacity="0.5" />
-            
-            {/* Torre direita */}
-            <rect x="54" y="32" width="14" height="32" rx="1" />
-            <rect x="62" y="42" width="3" height="6" rx="1.5" fill="#14063D" />
-            <circle cx="61" cy="30" r="2.5" fill="#14063D" opacity="0.7" />
-            <rect x="55" y="26" width="12" height="4" rx="1" fill="#14063D" opacity="0.5" />
-            
-            {/* Corpo central */}
-            <rect x="26" y="36" width="28" height="28" />
-            
-            {/* Porta arqueada */}
-            <path d="M34 64 V50 Q34 45 40 45 Q46 45 46 50 V64" fill="#14063D" />
-            
-            {/* Janela central circular */}
-            <circle cx="40" cy="33" r="4" fill="#14063D" />
-            <circle cx="40" cy="33" r="2" fill="currentColor" opacity="0.3" />
-            
-            {/* Telhado central */}
-            <path d="M23 36 L40 22 L57 36" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.7" />
-            
-            {/* Cruz no topo */}
-            <line x1="40" y1="14" x2="40" y2="22" stroke="currentColor" strokeWidth="2" />
-            <line x1="37" y1="17" x2="43" y2="17" stroke="currentColor" strokeWidth="2" />
-            
-            {/* Detalhes arquitetônicos - janelas laterais */}
-            <rect x="29" y="48" width="4" height="6" rx="2" fill="#14063D" opacity="0.6" />
-            <rect x="47" y="48" width="4" height="6" rx="2" fill="#14063D" opacity="0.6" />
-          </svg>
         </div>
       </section>
 
-      {/* Grid de cards premium */}
-      <section className="mt-6 grid grid-cols-3 gap-3 px-4">
-        {tiles.map(({ to, label, icon: Icon, color }) => (
-          <Link
-            key={to}
-            to={to}
-            className="card-premium group flex aspect-square flex-col items-center justify-center gap-2.5 p-3"
-            style={{ "--color": color } as React.CSSProperties}
+      {/* ============ O QUE VOCÊ PROCURA ============ */}
+      <section className="bg-cream px-4 pt-6 pb-7">
+        <h2 className="mb-4 flex items-center justify-center gap-2 text-center text-base font-extrabold uppercase tracking-wider text-on-cream">
+          <Sparkles className="h-4 w-4 text-[color:var(--bonfire)]" />
+          O que você procura?
+          <Sparkles className="h-4 w-4 text-[color:var(--bonfire)]" />
+        </h2>
+
+        <div className="grid grid-cols-2 gap-3">
+          {tiles.map(({ to, label, desc, icon: Icon, color }) => (
+            <Link
+              key={to}
+              to={to}
+              className="tile-light group flex flex-col gap-2 p-3.5"
+            >
+              <div
+                className="icon-badge grid h-11 w-11 place-items-center rounded-2xl"
+                style={{ "--color": color } as React.CSSProperties}
+              >
+                <Icon className="h-5 w-5" strokeWidth={2.4} />
+              </div>
+              <div>
+                <h3 className="text-[13px] font-extrabold uppercase tracking-wide text-on-cream">
+                  {label}
+                </h3>
+                <p className="mt-0.5 text-[11.5px] leading-snug muted-on-cream">{desc}</p>
+              </div>
+              <ArrowRight
+                className="mt-auto h-4 w-4 transition-transform group-hover:translate-x-1"
+                style={{ color: color as string }}
+              />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ PROGRAMAÇÃO EM DESTAQUE ============ */}
+      <section className="px-4 pt-6">
+        <div className="card-night relative p-4">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-white">
+              <Sparkles className="h-4 w-4 text-[color:var(--gold)]" />
+              Programação em destaque
+            </h2>
+            <Link
+              to="/programacao"
+              className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-semibold text-white/90 hover:bg-white/10"
+            >
+              Ver toda <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+
+          <div className="relative">
+            <button
+              onClick={() => scrollBy(-1)}
+              aria-label="Anterior"
+              className="absolute -left-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              aria-label="Próximo"
+              className="absolute -right-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+
+            <div
+              ref={carouselRef}
+              className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {destaques.length === 0 && (
+                <p className="px-2 py-6 text-sm text-white/60">Programação em breve.</p>
+              )}
+              {destaques.map((s) => {
+                const { dia, mes } = formatDay(s.data);
+                return (
+                  <Link
+                    key={s.id}
+                    to="/programacao"
+                    className="group relative w-[160px] flex-none snap-start overflow-hidden rounded-2xl bg-gradient-to-b from-white/10 to-white/[0.02] ring-1 ring-white/10 hover:ring-[color:var(--magenta)]/40"
+                  >
+                    <div className="relative h-[88px] overflow-hidden bg-gradient-to-br from-[color:var(--magenta)]/40 via-[color:var(--bonfire)]/30 to-[color:var(--gold)]/30">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.25),transparent_60%)]" />
+                      <div className="show-date-chip absolute left-2 top-2 flex flex-col items-center px-2 py-1.5">
+                        <span className="text-[15px] leading-none">{dia}</span>
+                        <span className="text-[9px] font-bold tracking-wider">{mes}</span>
+                      </div>
+                      <Music className="absolute bottom-2 right-2 h-5 w-5 text-white/80" />
+                    </div>
+                    <div className="p-2.5">
+                      <p className="truncate text-[12.5px] font-bold text-white">{s.artista}</p>
+                      <p className="mt-1 flex items-center gap-1 truncate text-[10.5px] text-white/70">
+                        <MapPin className="h-3 w-3" />
+                        {poloNome.get(s.polo) ?? s.polo}
+                      </p>
+                      {s.genero && (
+                        <p className="mt-0.5 truncate text-[10px] text-[color:var(--gold)]/90">
+                          {s.genero}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ TRADIÇÃO QUE AQUECE O CORAÇÃO ============ */}
+      <section className="px-4 pt-4">
+        <div className="card-night relative overflow-hidden p-4">
+          <div className="grid grid-cols-[1fr_1.2fr] items-center gap-2">
+            <img
+              src={casalDancando}
+              alt=""
+              aria-hidden
+              className="h-[130px] w-auto drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)]"
+            />
+            <div>
+              <h2 className="text-base font-extrabold uppercase leading-tight text-white">
+                Tradição que aquece o coração
+              </h2>
+              <p className="mt-2 text-[12px] leading-relaxed text-white/80">
+                O São João de Arcoverde é feito de música, dança, comida boa e do calor de um povo que recebe com alegria!
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-3 flex items-end justify-between gap-3">
+            <Link
+              to="/sobre"
+              className="cta-gold inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-extrabold uppercase tracking-wide"
+            >
+              Conheça nossa história
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <div className="relative w-[110px] shrink-0">
+              <img src={mapaPernambuco} alt="Localização: Arcoverde, Pernambuco" className="w-full opacity-95" />
+              <p className="mt-1 text-right text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--gold)]">
+                Arcoverde
+                <span className="block text-[8.5px] font-bold text-white/60">Pernambuco</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FEATURE CHIPS ============ */}
+      <section className="grid grid-cols-2 gap-2.5 px-4 pt-4">
+        {features.map(({ icon: Icon, title, desc, color }) => (
+          <div
+            key={title}
+            className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 backdrop-blur"
           >
             <div
-              className="icon-badge grid h-14 w-14 place-items-center rounded-2xl"
-              style={{ "--color": color } as React.CSSProperties}
+              className="grid h-9 w-9 place-items-center rounded-xl"
+              style={{
+                background: `color-mix(in oklab, ${color} 22%, transparent)`,
+                color: color as string,
+              }}
             >
-              <Icon className="h-7 w-7" strokeWidth={2.25} />
+              <Icon className="h-4.5 w-4.5" strokeWidth={2.2} />
             </div>
-            <span className="text-center text-[11px] font-extrabold uppercase tracking-wider text-foreground">
-              {label}
-            </span>
-          </Link>
+            <div className="min-w-0">
+              <p className="truncate text-[11.5px] font-extrabold uppercase tracking-wide text-white">
+                {title}
+              </p>
+              <p className="truncate text-[10.5px] text-white/60">{desc}</p>
+            </div>
+          </div>
         ))}
       </section>
 
-      <p className="mt-auto px-6 pt-4 text-center text-xs text-muted-foreground">
+      <p className="px-6 pt-5 text-center text-[11px] text-white/55">
         💾 Disponível offline · 🎶 Forró pé de serra
       </p>
     </main>
