@@ -115,9 +115,9 @@ function Home() {
   return (
     <main className="mx-auto min-h-screen max-w-xl pb-28">
       {/* ============ HERO ============ */}
-      <section className="hero-night relative overflow-hidden px-5 pt-3 pb-6">
+      <section className="hero-night relative overflow-hidden px-4 pt-3 pb-6 sm:px-5">
         {/* bandeirinhas no topo */}
-        <div className="bunting-elegant -mx-5 mb-3" aria-hidden />
+        <div className="bunting-elegant -mx-4 mb-3 sm:-mx-5" aria-hidden />
 
         {/* fogos sutis */}
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
@@ -135,24 +135,24 @@ function Home() {
               className="w-full max-w-[240px] drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
             />
           </div>
-          <div className="relative h-[180px]">
+          <div className="relative h-[clamp(150px,42vw,200px)]">
             <img
               src={igreja}
               alt=""
               aria-hidden
-              className="absolute right-0 top-0 h-[140px] w-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.45)]"
+              className="absolute right-0 top-0 h-[clamp(110px,32vw,150px)] w-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.45)]"
             />
             <img
               src={sanfoneiro}
               alt=""
               aria-hidden
-              className="absolute -bottom-2 left-0 h-[130px] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+              className="absolute -bottom-2 left-0 h-[clamp(100px,30vw,140px)] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
             />
             <img
               src={casalDancando}
               alt=""
               aria-hidden
-              className="absolute -bottom-2 right-1 h-[110px] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+              className="absolute -bottom-2 right-1 h-[clamp(86px,25vw,120px)] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
             />
           </div>
         </div>
@@ -163,18 +163,18 @@ function Home() {
             Tradição, cultura e alegria que encantam gerações. Venha viver o São João mais autêntico do país!
           </p>
 
-          <div className="date-badge inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-bold text-[color:var(--gold)]">
-            <Calendar className="h-4 w-4" />
-            13 a 28 de junho · 2026
+          <div className="date-badge inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-2 text-[12px] font-bold text-[color:var(--gold)] sm:text-[13px]">
+            <Calendar className="h-4 w-4 shrink-0" />
+            <span className="whitespace-nowrap">13 a 28 de junho · 2026</span>
           </div>
 
           <div>
             <Link
               to="/programacao"
-              className="cta-festa inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-extrabold uppercase tracking-wide"
+              className="cta-festa inline-flex max-w-full items-center gap-2 rounded-full px-4 py-2.5 text-[12px] font-extrabold uppercase tracking-wide sm:px-5 sm:text-sm"
             >
-              Veja a programação completa
-              <ArrowRight className="h-4 w-4" />
+              <span className="truncate">Veja a programação completa</span>
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </div>
         </div>
