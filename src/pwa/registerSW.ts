@@ -21,9 +21,7 @@ function isPreviewOrIframe(): boolean {
   return PREVIEW_HOSTS.some((h) => host.includes(h));
 }
 
-export async function registerServiceWorker(
-  onUpdateAvailable?: () => void
-): Promise<void> {
+export async function registerServiceWorker(onUpdateAvailable?: () => void): Promise<void> {
   if (typeof window === "undefined") return;
 
   if (isPreviewOrIframe()) {

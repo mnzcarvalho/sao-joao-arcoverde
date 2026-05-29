@@ -5,7 +5,10 @@ import type { Show } from "@/types/domain";
 export function useProgramacao(): Show[] {
   const [data, setData] = useState<Show[]>([]);
   useEffect(() => {
-    programacaoRepo.list().then(setData).catch(() => setData([]));
+    programacaoRepo
+      .list()
+      .then(setData)
+      .catch(() => setData([]));
   }, []);
   return data;
 }
@@ -13,8 +16,14 @@ export function useProgramacao(): Show[] {
 export function useProgramacaoPorPolo(poloId: string | undefined): Show[] {
   const [data, setData] = useState<Show[]>([]);
   useEffect(() => {
-    if (!poloId) { setData([]); return; }
-    programacaoRepo.byPolo(poloId).then(setData).catch(() => setData([]));
+    if (!poloId) {
+      setData([]);
+      return;
+    }
+    programacaoRepo
+      .byPolo(poloId)
+      .then(setData)
+      .catch(() => setData([]));
   }, [poloId]);
   return data;
 }

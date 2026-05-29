@@ -18,7 +18,8 @@ function Devs() {
           </div>
           <h2 className="mt-4 font-display text-xl">Time de Desenvolvimento</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            App oficial do São João de Arcoverde — feito com <Heart className="inline h-4 w-4 text-[var(--flag-red)]" /> para a cultura nordestina.
+            App oficial do São João de Arcoverde — feito com{" "}
+            <Heart className="inline h-4 w-4 text-[var(--flag-red)]" /> para a cultura nordestina.
           </p>
           <div className="mt-6 space-y-2 text-sm">
             <p className="font-semibold">Equipe</p>

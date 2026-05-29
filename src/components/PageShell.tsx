@@ -2,7 +2,17 @@ import { Link, useRouter } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import type { ReactNode } from "react";
 
-export function PageHeader({ title, subtitle, back = true, action }: { title: string; subtitle?: string; back?: boolean; action?: ReactNode }) {
+export function PageHeader({
+  title,
+  subtitle,
+  back = true,
+  action,
+}: {
+  title: string;
+  subtitle?: string;
+  back?: boolean;
+  action?: ReactNode;
+}) {
   const router = useRouter();
   return (
     <header className="relative">

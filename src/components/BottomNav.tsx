@@ -34,12 +34,16 @@ export function BottomNav() {
                 >
                   <Icon
                     className={`h-5 w-5 transition-transform ${
-                      active ? "text-white drop-shadow-[0_0_8px_color-mix(in_oklab,var(--magenta)_70%,transparent)]" : ""
+                      active
+                        ? "text-white drop-shadow-[0_0_8px_color-mix(in_oklab,var(--magenta)_70%,transparent)]"
+                        : ""
                     }`}
                     strokeWidth={active ? 2.4 : 2}
                   />
                 </span>
-                <span className={`font-semibold ${active ? "text-[color:var(--gold)]" : ""}`}>{label}</span>
+                <span className={`font-semibold ${active ? "text-[color:var(--gold)]" : ""}`}>
+                  {label}
+                </span>
               </Link>
             </li>
           );

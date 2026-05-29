@@ -40,7 +40,11 @@ export async function seedIfNeeded(): Promise<void> {
   const hospedagem = safeParse(LugarSchema, hospedagemJson, "hospedagem");
   const turismo = safeParse(LugarSchema, turismoJson, "turismo");
 
-  let historia: z.infer<typeof HistoriaSchema> = { sobreCidade: "", sobreSaoJoao: "", curiosidades: [] };
+  let historia: z.infer<typeof HistoriaSchema> = {
+    sobreCidade: "",
+    sobreSaoJoao: "",
+    curiosidades: [],
+  };
   try {
     historia = HistoriaSchema.parse(historiaJson);
   } catch (e) {
@@ -66,7 +70,7 @@ export async function seedIfNeeded(): Promise<void> {
       await metaRepo.set("historia", historia);
       await metaRepo.set("seededAt", new Date().toISOString());
       await metaRepo.set(SEED_KEY, SEED_VERSION);
-    }
+    },
   );
 }
 
@@ -91,6 +95,6 @@ export async function clearAll(): Promise<void> {
         db.favoritos.clear(),
         db.meta.clear(),
       ]);
-    }
+    },
   );
 }

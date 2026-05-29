@@ -8,7 +8,10 @@ export const Route = createFileRoute("/polos")({
   head: () => ({
     meta: [
       { title: "Polos — São João de Arcoverde" },
-      { name: "description", content: "Todos os polos do São João de Arcoverde com endereços e horários." },
+      {
+        name: "description",
+        content: "Todos os polos do São João de Arcoverde com endereços e horários.",
+      },
     ],
   }),
 });

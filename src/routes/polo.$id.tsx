@@ -9,7 +9,9 @@ export const Route = createFileRoute("/polo/$id")({
   notFoundComponent: () => (
     <div className="p-6 text-center">
       <p>Polo não encontrado.</p>
-      <Link to="/polos" className="text-primary underline">Ver polos</Link>
+      <Link to="/polos" className="text-primary underline">
+        Ver polos
+      </Link>
     </div>
   ),
 });

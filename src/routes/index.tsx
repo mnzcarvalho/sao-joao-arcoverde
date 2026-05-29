@@ -15,9 +15,7 @@ import {
   Heart,
 } from "lucide-react";
 import { useMemo, useRef } from "react";
-import heroTitle from "@/assets/hero-title.png";
-import igreja from "@/assets/igreja.png";
-import sanfoneiro from "@/assets/sanfoneiro.png";
+import topImg from "@/assets/top.png";
 import casalDancando from "@/assets/casal-dancando.png";
 import mapaPernambuco from "@/assets/mapa-pernambuco.png";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
@@ -29,7 +27,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "São João de Arcoverde — O melhor do Brasil" },
-      { name: "description", content: "Tradição, cultura e alegria no maior São João do sertão pernambucano. 13 a 28 de junho de 2026." },
+      {
+        name: "description",
+        content:
+          "Tradição, cultura e alegria no maior São João do sertão pernambucano. 13 a 28 de junho de 2026.",
+      },
     ],
   }),
 });
@@ -81,14 +83,38 @@ const tiles = [
 
 const features = [
   { icon: Music, title: "Música ao vivo", desc: "Todos os dias", color: "var(--magenta)" },
-  { icon: Flame, title: "Cultura e tradição", desc: "Raízes que encantam", color: "var(--bonfire)" },
+  {
+    icon: Flame,
+    title: "Cultura e tradição",
+    desc: "Raízes que encantam",
+    color: "var(--bonfire)",
+  },
   { icon: Sparkles, title: "Ambiente familiar", desc: "Diversão para todos", color: "var(--gold)" },
-  { icon: Heart, title: "Hospitalidade", desc: "O melhor do Brasil!", color: "oklch(0.66 0.22 25)" },
+  {
+    icon: Heart,
+    title: "Hospitalidade",
+    desc: "O melhor do Brasil!",
+    color: "oklch(0.66 0.22 25)",
+  },
 ];
 
 function formatDay(iso: string) {
   const [, m, d] = iso.split("-");
-  const months = ["", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+  const months = [
+    "",
+    "JAN",
+    "FEV",
+    "MAR",
+    "ABR",
+    "MAI",
+    "JUN",
+    "JUL",
+    "AGO",
+    "SET",
+    "OUT",
+    "NOV",
+    "DEZ",
+  ];
   return { dia: d, mes: months[Number(m)] ?? "" };
 }
 
@@ -102,9 +128,7 @@ function Home() {
   }, [polos]);
 
   const destaques: Show[] = useMemo(() => {
-    return [...shows]
-      .sort((a, b) => a.data.localeCompare(b.data))
-      .slice(0, 8);
+    return [...shows].sort((a, b) => a.data.localeCompare(b.data)).slice(0, 8);
   }, [shows]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -122,45 +146,30 @@ function Home() {
         {/* fogos sutis */}
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
           <div className="absolute top-10 right-6 h-2 w-2 rounded-full bg-[color:var(--gold)] animate-sparkle" />
-          <div className="absolute top-24 right-16 h-1.5 w-1.5 rounded-full bg-[color:var(--magenta)] animate-sparkle" style={{ animationDelay: "0.6s" }} />
-          <div className="absolute top-32 left-8 h-1.5 w-1.5 rounded-full bg-[color:var(--gold)] animate-sparkle" style={{ animationDelay: "1.1s" }} />
+          <div
+            className="absolute top-24 right-16 h-1.5 w-1.5 rounded-full bg-[color:var(--magenta)] animate-sparkle"
+            style={{ animationDelay: "0.6s" }}
+          />
+          <div
+            className="absolute top-32 left-8 h-1.5 w-1.5 rounded-full bg-[color:var(--gold)] animate-sparkle"
+            style={{ animationDelay: "1.1s" }}
+          />
         </div>
 
-        {/* logo título + ilustrações lado a lado */}
-        <div className="relative grid grid-cols-[1.05fr_0.95fr] items-end gap-2">
-          <div className="pt-1">
-            <img
-              src={heroTitle}
-              alt="São João de Arcoverde — O melhor do Brasil"
-              className="w-full max-w-[240px] drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
-            />
-          </div>
-          <div className="relative h-[clamp(150px,42vw,200px)]">
-            <img
-              src={igreja}
-              alt=""
-              aria-hidden
-              className="absolute right-0 top-0 h-[clamp(110px,32vw,150px)] w-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.45)]"
-            />
-            <img
-              src={sanfoneiro}
-              alt=""
-              aria-hidden
-              className="absolute -bottom-2 left-0 h-[clamp(100px,30vw,140px)] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
-            />
-            <img
-              src={casalDancando}
-              alt=""
-              aria-hidden
-              className="absolute -bottom-2 right-1 h-[clamp(86px,25vw,120px)] w-auto drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
-            />
-          </div>
+        {/* logo título + ilustrações — imagem unificada */}
+        <div className="relative">
+          <img
+            src={topImg}
+            alt="São João de Arcoverde — O melhor do Brasil"
+            className="w-full drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
+          />
         </div>
 
         {/* descrição + badge + CTA */}
         <div className="relative mt-3 space-y-3">
           <p className="text-[13px] leading-relaxed text-[color:var(--foreground)]/85">
-            Tradição, cultura e alegria que encantam gerações. Venha viver o São João mais autêntico do país!
+            Tradição, cultura e alegria que encantam gerações. Venha viver o São João mais autêntico
+            do país!
           </p>
 
           <div className="date-badge inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-2 text-[12px] font-bold text-[color:var(--gold)] sm:text-[13px]">
@@ -190,11 +199,7 @@ function Home() {
 
         <div className="grid grid-cols-2 gap-3">
           {tiles.map(({ to, label, desc, icon: Icon, color }) => (
-            <Link
-              key={to}
-              to={to}
-              className="tile-light group flex flex-col gap-2 p-3.5"
-            >
+            <Link key={to} to={to} className="tile-light group flex flex-col gap-2 p-3.5">
               <div
                 className="icon-badge grid h-11 w-11 place-items-center rounded-2xl"
                 style={{ "--color": color } as React.CSSProperties}
@@ -306,7 +311,8 @@ function Home() {
                 Tradição que aquece o coração
               </h2>
               <p className="mt-2 text-[12px] leading-relaxed text-white/80">
-                O São João de Arcoverde é feito de música, dança, comida boa e do calor de um povo que recebe com alegria!
+                O São João de Arcoverde é feito de música, dança, comida boa e do calor de um povo
+                que recebe com alegria!
               </p>
             </div>
           </div>
@@ -320,7 +326,11 @@ function Home() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <div className="relative w-[110px] shrink-0">
-              <img src={mapaPernambuco} alt="Localização: Arcoverde, Pernambuco" className="w-full opacity-95" />
+              <img
+                src={mapaPernambuco}
+                alt="Localização: Arcoverde, Pernambuco"
+                className="w-full opacity-95"
+              />
               <p className="mt-1 text-right text-[10px] font-extrabold uppercase tracking-wider text-[color:var(--gold)]">
                 Arcoverde
                 <span className="block text-[8.5px] font-bold text-white/60">Pernambuco</span>

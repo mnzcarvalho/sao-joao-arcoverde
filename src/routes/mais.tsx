@@ -23,7 +23,10 @@ function Mais() {
       <ul className="space-y-2 px-4">
         {items.map(({ to, label, icon: Icon }) => (
           <li key={to}>
-            <Link to={to} className="card-tile flex items-center gap-4 p-4 transition active:scale-[0.99]">
+            <Link
+              to={to}
+              className="card-tile flex items-center gap-4 p-4 transition active:scale-[0.99]"
+            >
               <div className="grid h-10 w-10 place-items-center rounded-full bg-[var(--surface-2)] text-accent">
                 <Icon className="h-5 w-5" />
               </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 /** Reactive online/offline status. Returns true on SSR (assumed online). */
 export function useOnlineStatus(): boolean {
   const [online, setOnline] = useState<boolean>(() =>
-    typeof navigator === "undefined" ? true : navigator.onLine
+    typeof navigator === "undefined" ? true : navigator.onLine,
   );
   useEffect(() => {
     const on = () => setOnline(true);

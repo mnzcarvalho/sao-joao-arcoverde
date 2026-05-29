@@ -12,7 +12,10 @@ export const Route = createFileRoute("/programacao")({
   head: () => ({
     meta: [
       { title: "Programação — São João de Arcoverde" },
-      { name: "description", content: "Programação completa por polo, com bandas, cantores, dias e horários." },
+      {
+        name: "description",
+        content: "Programação completa por polo, com bandas, cantores, dias e horários.",
+      },
     ],
   }),
 });
@@ -28,7 +31,7 @@ function Programacao() {
 
   const shows = useMemo(
     () => programacao.filter((s) => s.polo === activePolo),
-    [programacao, activePolo]
+    [programacao, activePolo],
   );
 
   const porDia = useMemo(() => {
@@ -115,7 +118,9 @@ function ShowItem({ show }: { show: Show }) {
         aria-label={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
         className="grid h-9 w-9 place-items-center rounded-full bg-[var(--surface-2)]"
       >
-        <Heart className={`h-4 w-4 ${isFav ? "fill-[var(--flag-red)] text-[var(--flag-red)]" : "text-muted-foreground"}`} />
+        <Heart
+          className={`h-4 w-4 ${isFav ? "fill-[var(--flag-red)] text-[var(--flag-red)]" : "text-muted-foreground"}`}
+        />
       </button>
     </li>
   );

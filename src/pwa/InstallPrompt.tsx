@@ -32,7 +32,11 @@ export function InstallPrompt() {
     setEvt(null);
   };
   const dismiss = () => {
-    try { localStorage.setItem(DISMISS_KEY, "1"); } catch {}
+    try {
+      localStorage.setItem(DISMISS_KEY, "1");
+    } catch {
+      /* intencional: localStorage pode estar indisponível */
+    }
     setEvt(null);
   };
 
@@ -49,10 +53,17 @@ export function InstallPrompt() {
         <p className="text-sm font-semibold">Instalar o app</p>
         <p className="text-xs text-muted-foreground">Acesso rápido e offline.</p>
       </div>
-      <button onClick={install} className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground">
+      <button
+        onClick={install}
+        className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground"
+      >
         Instalar
       </button>
-      <button onClick={dismiss} aria-label="Dispensar" className="grid h-7 w-7 place-items-center rounded-full bg-[var(--surface)]">
+      <button
+        onClick={dismiss}
+        aria-label="Dispensar"
+        className="grid h-7 w-7 place-items-center rounded-full bg-[var(--surface)]"
+      >
         <X className="h-4 w-4" />
       </button>
     </div>

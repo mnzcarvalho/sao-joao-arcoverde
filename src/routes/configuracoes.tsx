@@ -20,14 +20,20 @@ function Configs() {
 
   const onRefresh = async () => {
     setBusy(true);
-    try { await reseed(); } finally { setBusy(false); }
+    try {
+      await reseed();
+    } finally {
+      setBusy(false);
+    }
   };
   const onClear = async () => {
     setBusy(true);
     try {
       await clearAll();
       await reseed();
-    } finally { setBusy(false); }
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (

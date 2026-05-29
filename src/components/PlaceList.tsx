@@ -11,7 +11,9 @@ const mapsUrl = (q: string) =>
 
 export function PlaceList({ items, emptyLabel }: Props) {
   if (!items.length)
-    return <p className="px-4 text-sm text-muted-foreground">{emptyLabel ?? "Nada por aqui ainda."}</p>;
+    return (
+      <p className="px-4 text-sm text-muted-foreground">{emptyLabel ?? "Nada por aqui ainda."}</p>
+    );
   return (
     <ul className="space-y-3 px-4">
       {items.map((it) => (
