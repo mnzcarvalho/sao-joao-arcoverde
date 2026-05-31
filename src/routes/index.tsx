@@ -139,9 +139,7 @@ function Home() {
   return (
     <main className="mx-auto min-h-screen max-w-xl pb-28">
       {/* ============ HERO ============ */}
-      <section className="hero-night relative overflow-hidden px-4 pt-3 pb-6 sm:px-5">
-        {/* bandeirinhas no topo */}
-        <div className="bunting-elegant -mx-4 mb-3 sm:-mx-5" aria-hidden />
+      <section className="hero-night relative overflow-hidden px-4 pt-0 pb-0 sm:px-5">
 
         {/* fogos sutis */}
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
@@ -157,33 +155,33 @@ function Home() {
         </div>
 
         {/* logo título + ilustrações — imagem unificada */}
-        <div className="relative">
+        <div className="relative -mx-4 sm:-mx-5 w-[calc(100%+2rem)] sm:w-[calc(100%+2.5rem)]">
           <img
             src={topImg}
             alt="São João de Arcoverde — O melhor do Brasil"
-            className="w-full drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
+            className="w-full block drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
           />
         </div>
 
-        {/* descrição + badge + CTA */}
-        <div className="relative mt-3 space-y-3">
-          <p className="text-[13px] leading-relaxed text-[color:var(--foreground)]/85">
-            Tradição, cultura e alegria que encantam gerações. Venha viver o São João mais autêntico
+
+        <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">
+          <p className="text-[10px] sm:text-[12px] md:text-sm font-medium leading-relaxed text-[color:var(--foreground)]/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            Tradição, cultura e alegria que encantam gerações. Venha viver o <br />São João mais autêntico
             do país!
           </p>
 
-          <div className="date-badge inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-2 text-[12px] font-bold text-[color:var(--gold)] sm:text-[13px]">
-            <Calendar className="h-4 w-4 shrink-0" />
+          <div className="date-badge inline-flex max-w-full items-center gap-1.5 rounded-full px-3 py-1.5 text-[9px] font-bold text-[color:var(--gold)] sm:text-[11px] bg-night/70 backdrop-blur-sm border border-white/5 shadow-md">
+            <Calendar className="h-3.5 w-3.5 shrink-0" />
             <span className="whitespace-nowrap">13 a 28 de junho · 2026</span>
           </div>
 
-          <div>
+          <div className="w-full">
             <Link
               to="/programacao"
-              className="cta-festa inline-flex max-w-full items-center gap-2 rounded-full px-4 py-2.5 text-[12px] font-extrabold uppercase tracking-wide sm:px-5 sm:text-sm"
+              className="cta-festa inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[9px] font-extrabold uppercase tracking-wide sm:text-xs shadow-glow border border-white/10"
             >
               <span className="truncate">Veja a programação completa</span>
-              <ArrowRight className="h-4 w-4 shrink-0" />
+              <ArrowRight className="h-3.5 w-3.5 shrink-0" />
             </Link>
           </div>
         </div>
