@@ -295,43 +295,42 @@ function Home() {
         </div>
       </section>
 
-      {/* ============ TRADIÇÃO QUE AQUECE O CORAÇÃO ============ */}
-             {/* ============ SEÇÃO TRADIÇÃO E HISTÓRIA ============ */}
+       {/* ============ SEÇÃO TRADIÇÃO E HISTÓRIA ============ */}
       <section className="px-4 pt-6">
-        <div className="card-night relative overflow-hidden p-6 sm:p-8 flex flex-row items-center justify-between gap-6">
+        <div className="card-night relative overflow-hidden p-4 sm:p-6 flex flex-row items-center justify-between gap-3 sm:gap-6">
           
-          {/* Lado Esquerdo: Textos e Botão Ampliados */}
-          <div className="flex flex-col items-start text-left space-y-5 flex-1">
-            <div className="space-y-2.5">
-              <h2 className="text-base sm:text-lg font-extrabold uppercase tracking-wider text-white">
+          {/* Lado Esquerdo: Conteúdo (Ocupa 2/3 da largura no mobile) */}
+          <div className="flex flex-col items-start text-left space-y-3 w-[65%] sm:flex-1">
+            <div className="space-y-1">
+              <h2 className="text-[12px] sm:text-base font-extrabold uppercase tracking-wider text-white">
                 TRADIÇÃO QUE AQUECE O CORAÇÃO
               </h2>
-              <p className="text-[13.5px] sm:text-sm leading-relaxed text-white/95 max-w-[95%]">
+              <p className="text-[11px] sm:text-[13px] leading-relaxed text-white/90">
                 O São João de Arcoverde é feito de música, dança, comida boa e do calor de um povo que recebe com alegria!
               </p>
             </div>
 
             <Link
               to="/sobre"
-              className="cta-festa inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-extrabold uppercase tracking-wide shadow-glow border border-white/10"
+              className="cta-festa inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-2 text-[9px] sm:text-xs font-extrabold uppercase tracking-wide shadow-glow border border-white/10 whitespace-nowrap"
             >
               <span>CONHEÇA NOSSA HISTÓRIA</span>
-              <ArrowRight className="h-4 w-4 shrink-0" />
+              <ArrowRight className="h-3 w-3 shrink-0" />
             </Link>
           </div>
 
-          {/* Lado Direito: Mapa Super Destacado */}
-          <div className="flex flex-col items-center text-center shrink-0 space-y-2.5">
+          {/* Lado Direito: Mapa e Legenda (Ocupa 1/3 da largura no mobile) */}
+          <div className="flex flex-col items-center text-center w-[35%] shrink-0 space-y-1.5">
             <img 
               src={mapaPernambuco} 
               alt="Mapa de Pernambuco" 
-              className="w-36 sm:w-40 h-auto object-contain" 
+              className="w-full max-w-[90px] sm:max-w-[140px] h-auto object-contain" 
             />
             <div className="leading-tight">
-              <p className="text-[12px] font-black uppercase tracking-widest text-[color:var(--gold)]">
+              <p className="text-[10px] sm:text-[12px] font-black uppercase tracking-wider text-[color:var(--gold)]">
                 ARCOVERDE
               </p>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">
+              <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-wider text-white/60">
                 PERNAMBUCO
               </p>
             </div>
