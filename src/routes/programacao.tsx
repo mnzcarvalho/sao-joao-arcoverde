@@ -4,7 +4,7 @@ import { PageHeader, PageShell } from "@/components/PageShell";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
 import { usePolos } from "@/features/polos/hooks/usePolos";
 import { useIsFavorito, toggleFavorito } from "@/features/favoritos/hooks/useFavoritos";
-import { Clock, Heart, Music, Search } from "lucide-react";
+import { Heart, Search, User, Clock } from "lucide-react";
 import type { Show } from "@/types/domain";
 
 export const Route = createFileRoute("/programacao")({
@@ -29,7 +29,6 @@ function Programacao() {
   
   const polosRef = useRef<HTMLDivElement>(null);
   
-  // Refs para rastrear se o usuário está arrastando ou apenas clicando
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
@@ -38,12 +37,11 @@ function Programacao() {
     if (!activePolo && polos.length) setActivePolo(polos[0].id);
   }, [polos, activePolo]);
 
-  // Lógica de arrastar unificada (funciona clicando em qualquer lugar, inclusive nos botões)
   const handleMouseDown = (e: React.MouseEvent) => {
     const slider = polosRef.current;
     if (!slider) return;
     
-    isDragging.current = false; // Reseta o estado de arrasto
+    isDragging.current = false;
     startX.current = e.pageX - slider.offsetLeft;
     scrollLeft.current = slider.scrollLeft;
 
@@ -51,7 +49,6 @@ function Programacao() {
       const x = moveEvent.pageX - slider.offsetLeft;
       const walk = (x - startX.current) * 1.5;
       
-      // Se moveu mais de 5 pixels, consideramos como um arrasto legítimo
       if (Math.abs(walk) > 5) {
         isDragging.current = true;
         slider.scrollLeft = scrollLeft.current - walk;
@@ -67,7 +64,6 @@ function Programacao() {
     window.addEventListener('mouseup', handleMouseUpOrLeave);
   };
 
-  // Só altera o polo se o usuário não estava arrastando a barra
   const handlePoloClick = (poloId: string) => {
     if (!isDragging.current) {
       setActivePolo(poloId);
@@ -169,31 +165,74 @@ function Programacao() {
   );
 }
 
+// Componente estruturado com base precisa no comportamento do banco de dados
 function ShowItem({ show }: { show: Show }) {
   const isFav = useIsFavorito(show.id);
+
+  // Mapeamento dinâmico para quando você decidir injetar caminhos de fotos/imagens no JSON
+  const fotoArtista = (show as any).imagem || (show as any).fotoUrl || (show as any).foto;
+
+  // Tratamento preciso: avalia se a string de fato contém conteúdo válido
+  const temHorarioValido = show.hora && show.hora.trim() !== "";
+
   return (
-    <li className="card-tile flex items-center gap-4 p-3">
-      <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-bonfire text-primary-foreground">
-        {show.hora ? (
-          <>
-            <Clock className="h-3.5 w-3.5" />
-            <span className="text-xs font-bold">{show.hora}</span>
-          </>
+    <li className="card-tile flex items-center gap-3 p-3 rounded-2xl bg-[var(--surface-1)]">
+      
+      {/* Espaço para foto do artista (Mobile-first, redondo perfeito) */}
+      <div className="relative h-14 w-14 shrink-0 rounded-full border-2 border-primary/20 shadow-sm bg-[var(--surface-3)] flex items-center justify-center overflow-hidden">
+        {fotoArtista ? (
+          <img
+            src={fotoArtista}
+            alt={show.artista}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         ) : (
-          <Music className="h-5 w-5" />
+          /* Fallback elegante com gradiente enquanto as fotos não são inseridas no JSON */
+          <div className="h-full w-full bg-gradient-to-br from-primary/10 to-bonfire/20 flex items-center justify-center">
+            <User className="h-5 w-5 text-muted-foreground/60" />
+          </div>
         )}
       </div>
-      <div className="flex-1">
-        <h3 className="font-display text-base font-semibold leading-tight">{show.artista}</h3>
-        {show.genero && <p className="text-xs text-muted-foreground">{show.genero}</p>}
+
+      {/* Detalhes textuais alinhados */}
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        <h3 className="font-display text-base font-bold leading-tight truncate text-foreground">
+          {show.artista}
+        </h3>
+        
+        <div className="flex items-center gap-2 mt-1">
+          {/* Badge de Horário condicional ultra precisa */}
+          {temHorarioValido ? (
+            <span className="shrink-0 inline-flex items-center gap-1 bg-bonfire/10 text-bonfire text-[11px] font-black px-2 py-0.5 rounded-md border border-bonfire/20 tracking-wide">
+              <Clock className="h-3 w-3" />
+              {show.hora}
+            </span>
+          ) : (
+            /* Layout Mobile responsivo: Se for string vazia (ex: Palco Principal), mostra uma tag neutra indicando que é noturno ou sequência */
+            <span className="shrink-0 inline-block bg-muted/20 text-muted-foreground/70 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-muted/30 uppercase tracking-wider">
+              Noite
+            </span>
+          )}
+          
+          {show.genero && (
+            <span className="text-xs text-muted-foreground truncate font-medium">
+              {show.genero}
+            </span>
+          )}
+        </div>
       </div>
+
+      {/* Botão de Favorito */}
       <button
         onClick={() => toggleFavorito(show.id, "show")}
         aria-label={isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-        className="grid h-9 w-9 place-items-center rounded-full bg-[var(--surface-2)]"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--surface-2)] active:scale-95 transition"
       >
         <Heart
-          className={`h-4 w-4 ${isFav ? "fill-[var(--flag-red)] text-[var(--flag-red)]" : "text-muted-foreground"}`}
+          className={`h-4 w-4 transition-colors ${
+            isFav ? "fill-[var(--flag-red)] text-[var(--flag-red)]" : "text-muted-foreground"
+          }`}
         />
       </button>
     </li>
