@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { PageHeader, PageShell } from "@/components/PageShell";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
 import { usePolos } from "@/features/polos/hooks/usePolos";
 import { useIsFavorito, toggleFavorito } from "@/features/favoritos/hooks/useFavoritos";
-import { Clock, Heart, Music } from "lucide-react";
+import { Clock, Heart, Music, Search } from "lucide-react";
 import type { Show } from "@/types/domain";
 
 export const Route = createFileRoute("/programacao")({
@@ -25,14 +25,68 @@ function Programacao() {
   const polos = usePolos();
 
   const [activePolo, setActivePolo] = useState<string | undefined>();
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const polosRef = useRef<HTMLDivElement>(null);
+  
+  // Refs para rastrear se o usuário está arrastando ou apenas clicando
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
   useEffect(() => {
     if (!activePolo && polos.length) setActivePolo(polos[0].id);
   }, [polos, activePolo]);
 
-  const shows = useMemo(
-    () => programacao.filter((s) => s.polo === activePolo),
-    [programacao, activePolo],
-  );
+  // Lógica de arrastar unificada (funciona clicando em qualquer lugar, inclusive nos botões)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const slider = polosRef.current;
+    if (!slider) return;
+    
+    isDragging.current = false; // Reseta o estado de arrasto
+    startX.current = e.pageX - slider.offsetLeft;
+    scrollLeft.current = slider.scrollLeft;
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      const x = moveEvent.pageX - slider.offsetLeft;
+      const walk = (x - startX.current) * 1.5;
+      
+      // Se moveu mais de 5 pixels, consideramos como um arrasto legítimo
+      if (Math.abs(walk) > 5) {
+        isDragging.current = true;
+        slider.scrollLeft = scrollLeft.current - walk;
+      }
+    };
+
+    const handleMouseUpOrLeave = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUpOrLeave);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUpOrLeave);
+  };
+
+  // Só altera o polo se o usuário não estava arrastando a barra
+  const handlePoloClick = (poloId: string) => {
+    if (!isDragging.current) {
+      setActivePolo(poloId);
+    }
+  };
+
+  const shows = useMemo(() => {
+    return programacao.filter((s) => {
+      const matchesPolo = s.polo === activePolo;
+      
+      const query = searchQuery.toLowerCase().trim();
+      const matchesSearch = 
+        !query || 
+        s.artista.toLowerCase().includes(query) || 
+        (s.genero && s.genero.toLowerCase().includes(query));
+
+      return matchesPolo && matchesSearch;
+    });
+  }, [programacao, activePolo, searchQuery]);
 
   const porDia = useMemo(() => {
     const map = new Map<string, Show[]>();
@@ -52,14 +106,32 @@ function Programacao() {
     <PageShell>
       <PageHeader title="Programação" subtitle="Filtre por polo" />
 
+      {/* Input de Busca */}
+      <div className="px-4 mb-4">
+        <div className="relative flex items-center">
+          <Search className="absolute left-3 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <input
+            type="text"
+            placeholder="Buscar artista ou gênero..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-xl bg-[var(--surface-2)] pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition"
+          />
+        </div>
+      </div>
+
       {/* Filtro de polos */}
       <div className="px-4">
-        <div className="flex gap-2 overflow-x-auto pb-3">
+        <div 
+          ref={polosRef}
+          onMouseDown={handleMouseDown}
+          className="flex gap-2 items-center overflow-x-auto py-1 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
           {polos.map((p) => (
             <button
               key={p.id}
-              onClick={() => setActivePolo(p.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition ${
+              onClick={() => handlePoloClick(p.id)}
+              className={`shrink-0 h-full rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition ${
                 activePolo === p.id
                   ? "bg-primary text-primary-foreground shadow-[var(--shadow-glow)]"
                   : "bg-[var(--surface-2)] text-muted-foreground"
@@ -74,7 +146,9 @@ function Programacao() {
       {!polos.length && !programacao.length ? (
         <p className="px-4 text-sm text-muted-foreground">Carregando programação…</p>
       ) : porDia.length === 0 ? (
-        <p className="px-4 text-sm text-muted-foreground">Programação em breve.</p>
+        <p className="px-4 text-sm text-muted-foreground">
+          {searchQuery ? "Nenhum show encontrado para essa busca." : "Programação em breve."}
+        </p>
       ) : (
         <div className="space-y-5 px-4">
           {porDia.map(([dia, list]) => (
