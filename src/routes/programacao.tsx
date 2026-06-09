@@ -176,8 +176,25 @@ function Programacao() {
               <h2 className="mb-2 font-display text-base capitalize text-accent">{fmtDia(dia)}</h2>
               <ul className="space-y-2">
                 {list
-                  .sort((a, b) => (a.hora ?? "").localeCompare(b.hora ?? ""))
-                  .map((s) => (
+  .sort((a, b) => {
+    const converteParaMinutos = (horarioStr: string | undefined) => {
+      if (!horarioStr || !horarioStr.trim()) return 9999; // Se não tiver horário, joga pro fim
+      
+      const [horas, minutos] = horarioStr.split(":").map(Number);
+      let minutosTotais = horas * 60 + minutos;
+      
+      // Se o show for de madrugada (00:00 até 06:59), adiciona 24 horas (1440 minutos)
+      // para que ele seja jogado corretamente para o fim da programação daquele dia
+      if (horas >= 0 && horas < 7) {
+        minutosTotais += 24 * 60;
+      }
+      
+      return minutosTotais;
+    };
+
+    return converteParaMinutos(a.hora) - converteParaMinutos(b.hora);
+  })
+  .map((s) => (
                     <ShowItem key={s.id} show={s} />
                   ))}
               </ul>

@@ -14,12 +14,26 @@ import {
   Sparkles,
   Heart,
 } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import topImg from "@/assets/top.png";
 import mapaPernambuco from "@/assets/mapa-pernambuco.png";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
 import { usePolos } from "@/features/polos/hooks/usePolos";
 import type { Show } from "@/types/domain";
+
+// Importação dos cartazes juninos
+import arraiaDoCecora from "@/assets/cartaz/arraiaDoCecora.jpg";
+import estacaoCultural from "@/assets/cartaz/estacaoCultural.jpg";
+import festaDeSantoAntonio from "@/assets/cartaz/festaDeSantoAntonio.jpg";
+import poloCGA from "@/assets/cartaz/poloCGA.jpg";
+import poloCorredorCultural from "@/assets/cartaz/poloCorredorCultural.jpg";
+import poloDaCruz from "@/assets/cartaz/poloDaCruz.jpg";
+import poloDaPoesia from "@/assets/cartaz/poloDaPoesia.jpg";
+import poloDasArtes from "@/assets/cartaz/poloDasArtes.jpg";
+import poloMulticultural from "@/assets/cartaz/poloMulticultural.jpg";
+import poloMultimusical from "@/assets/cartaz/poloMultimusical.jpg";
+import poloPeDeSerra from "@/assets/cartaz/poloPeDeSerra.jpg";
+import poloRaizesDoCoco from "@/assets/cartaz/poloRaizesDoCoco.jpg";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -97,24 +111,95 @@ const features = [
   },
 ];
 
+const BANNERS = [
+  { id: 1, img: poloMulticultural, alt: "Polo Multicultural" },
+  { id: 2, img: arraiaDoCecora, alt: "Arraiá do Cecora" },
+  { id: 3, img: estacaoCultural, alt: "Estação Cultural" },
+  { id: 4, img: festaDeSantoAntonio, alt: "Festa de Santo Antônio" },
+  { id: 5, img: poloCGA, alt: "Polo CGA" },
+  { id: 6, img: poloCorredorCultural, alt: "Polo Corredor Cultural" },
+  { id: 7, img: poloDaCruz, alt: "Polo da Cruz" },
+  { id: 8, img: poloDaPoesia, alt: "Polo da Poesia" },
+  { id: 9, img: poloDasArtes, alt: "Polo das Artes" },
+  { id: 10, img: poloMultimusical, alt: "Polo Multimusical" },
+  { id: 11, img: poloPeDeSerra, alt: "Polo Pé de Serra" },
+  { id: 12, img: poloRaizesDoCoco, alt: "Polo Raízes do Coco" },
+];
+
 function formatDay(iso: string) {
   const [, m, d] = iso.split("-");
   const months = [
-    "",
-    "JAN",
-    "FEV",
-    "MAR",
-    "ABR",
-    "MAI",
-    "JUN",
-    "JUL",
-    "AGO",
-    "SET",
-    "OUT",
-    "NOV",
-    "DEZ",
+    "", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"
   ];
   return { dia: d, mes: months[Number(m)] ?? "" };
+}
+
+// Componente Interno do Carrossel de Banners
+function BannerCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? BANNERS.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === BANNERS.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  return (
+    <div className="w-full px-4 mt-2 mb-4 relative group">
+      {/* Container transparente */}
+      <div className="w-full h-56 sm:h-72 md:h-80 relative flex items-center justify-center bg-transparent">
+        
+        {/* Imagem do Cartaz: Ajustada para h-full e w-auto para a borda arredondada colar na foto */}
+        <img
+          src={BANNERS[currentIndex].img}
+          alt={BANNERS[currentIndex].alt}
+          className="h-full w-auto rounded-2xl drop-shadow-md transition-all duration-500"
+          key={currentIndex} 
+        />
+
+        {/* Controladores de Seta (Aparecem apenas no Desktop por cima do Hover) */}
+        <button
+          onClick={prevSlide}
+          className="hidden md:group-hover:flex absolute top-1/2 left-4 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-xs"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="hidden md:group-hover:flex absolute top-1/2 right-4 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-xs"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        {/* Indicadores Visuais de Paginação (Dots) */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 max-w-[85%] overflow-x-auto no-scrollbar py-1 px-2 rounded-full bg-black/40 backdrop-blur-md">
+          {BANNERS.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-1.5 rounded-full transition-all duration-300 shrink-0 ${
+                currentIndex === index ? "w-4 bg-[color:var(--gold)]" : "w-1.5 bg-white/70"
+              }`}
+              aria-label={`Ir para banner ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function Home() {
@@ -139,8 +224,6 @@ function Home() {
     <main className="mx-auto min-h-screen max-w-xl pb-28">
        {/* ============ HERO ============ */}
       <section className="hero-night relative overflow-hidden px-4 pt-0 pb-0 sm:px-5">
-
-        {/* fogos sutis */}
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
           <div className="absolute top-10 right-6 h-2 w-2 rounded-full bg-[color:var(--gold)] animate-sparkle" />
           <div
@@ -153,7 +236,6 @@ function Home() {
           />
         </div>
 
-        {/* logo título + ilustrações — imagem unificada */}
         <div className="relative -mx-4 sm:-mx-5 w-[calc(100%+2rem)] sm:w-[calc(100%+2.5rem)]">
           <img
             src={topImg}
@@ -162,9 +244,7 @@ function Home() {
           />
         </div>
 
-        {/* descrição + badge + CTA reposicionados no céu escuro (lado esquerdo) */}
-        {/* Usamos a margem negativa -mt para puxar os blocos para cima da imagem de forma segura */}
- <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">          
+        <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">          
           <p className="text-[10px] sm:text-[12px] md:text-sm font-medium leading-relaxed text-[color:var(--foreground)]/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
             Tradição, cultura e alegria que encantam gerações. Venha viver o <br />São João mais autêntico
             do país!
@@ -187,8 +267,13 @@ function Home() {
         </div>
       </section>
 
+      
+
       {/* ============ O QUE VOCÊ PROCURA ============ */}
+      
       <section className="bg-cream px-4 pt-6 pb-7">
+        {/* ============ BANNERS ROTATIVOS (Adicionado Aqui) ============ */}
+      <BannerCarousel />
         <h2 className="mb-4 flex items-center justify-center gap-2 text-center text-base font-extrabold uppercase tracking-wider text-on-cream">
           <Sparkles className="h-4 w-4 text-[color:var(--bonfire)]" />
           O que você procura?
@@ -297,8 +382,6 @@ function Home() {
        {/* ============ SEÇÃO TRADIÇÃO E HISTÓRIA ============ */}
       <section className="px-4 pt-6">
         <div className="card-night relative overflow-hidden p-4 sm:p-6 flex flex-row items-center justify-between gap-3 sm:gap-6">
-          
-          {/* Lado Esquerdo: Conteúdo (Ocupa 2/3 da largura no mobile) */}
           <div className="flex flex-col items-start text-left space-y-3 w-[65%] sm:flex-1">
             <div className="space-y-1">
               <h2 className="text-[12px] sm:text-base font-extrabold uppercase tracking-wider text-white">
@@ -318,7 +401,6 @@ function Home() {
             </Link>
           </div>
 
-          {/* Lado Direito: Mapa e Legenda (Ocupa 1/3 da largura no mobile) */}
           <div className="flex flex-col items-center text-center w-[35%] shrink-0 space-y-1.5">
             <img 
               src={mapaPernambuco} 
@@ -334,11 +416,8 @@ function Home() {
               </p>
             </div>
           </div>
-
         </div>
       </section>
-
-
 
       {/* ============ FEATURE CHIPS ============ */}
       <section className="grid grid-cols-2 gap-2.5 px-4 pt-4">

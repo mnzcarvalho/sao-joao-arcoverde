@@ -1,0 +1,211 @@
+sao-joao-arcoverde-main
+├── .agents
+│   └── skills
+│       ├── cavecrew
+│       │   └── SKILL.md
+│       ├── caveman
+│       │   └── SKILL.md
+│       ├── caveman-commit
+│       │   └── SKILL.md
+│       ├── caveman-compress
+│       │   ├── scripts
+│       │   │   ├── __init__.py
+│       │   │   ├── __main__.py
+│       │   │   ├── benchmark.py
+│       │   │   ├── cli.py
+│       │   │   ├── compress.py
+│       │   │   ├── detect.py
+│       │   │   └── validate.py
+│       │   ├── README.md
+│       │   ├── SECURITY.md
+│       │   └── SKILL.md
+│       ├── caveman-help
+│       │   └── SKILL.md
+│       ├── caveman-review
+│       │   └── SKILL.md
+│       ├── caveman-stats
+│       │   └── SKILL.md
+│       └── compress
+│           ├── scripts
+│           │   ├── __init__.py
+│           │   ├── __main__.py
+│           │   ├── benchmark.py
+│           │   ├── cli.py
+│           │   ├── compress.py
+│           │   ├── detect.py
+│           │   └── validate.py
+│           └── SKILL.md
+├── .idea
+│   ├── codeStyles
+│   │   ├── codeStyleConfig.xml
+│   │   └── Project.xml
+│   ├── inspectionProfiles
+│   │   └── Project_Default.xml
+│   ├── .gitignore
+│   ├── misc.xml
+│   ├── modules.xml
+│   ├── prettier.xml
+│   ├── sao-joao-arcoverde-main.iml
+│   ├── vcs.xml
+│   └── workspace.xml
+├── .wrangler
+│   └── deploy
+│       └── config.json
+├── public
+│   └── icons
+│       ├── icon-192.png
+│       └── icon-512.png
+├── src
+│   ├── assets
+│   │   ├── cartaz
+│   │   │   ├── arraiaDoCecora.jpg
+│   │   │   ├── estacaoCultural.jpg
+│   │   │   ├── festaDeSantoAntonio.jpg
+│   │   │   ├── poloCGA.jpg
+│   │   │   ├── poloCorredorCultural.jpg
+│   │   │   ├── poloDaCruz.jpg
+│   │   │   ├── poloDaPoesia.jpg
+│   │   │   ├── poloDasArtes.jpg
+│   │   │   ├── poloMulticultural.jpg
+│   │   │   ├── poloMultimusical.jpg
+│   │   │   ├── poloPeDeSerra.jpg
+│   │   │   └── poloRaizesDoCoco.jpg
+│   │   ├── casal-dancando.png
+│   │   ├── hero-title.png
+│   │   ├── igreja.png
+│   │   ├── mapa-pernambuco.png
+│   │   ├── sanfoneiro.png
+│   │   └── top.png
+│   ├── components
+│   │   ├── ui
+│   │   │   ├── accordion.tsx
+│   │   │   ├── alert-dialog.tsx
+│   │   │   ├── alert.tsx
+│   │   │   ├── aspect-ratio.tsx
+│   │   │   ├── avatar.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── breadcrumb.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── calendar.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── carousel.tsx
+│   │   │   ├── chart.tsx
+│   │   │   ├── checkbox.tsx
+│   │   │   ├── collapsible.tsx
+│   │   │   ├── command.tsx
+│   │   │   ├── context-menu.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── drawer.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── form.tsx
+│   │   │   ├── hover-card.tsx
+│   │   │   ├── input-otp.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── menubar.tsx
+│   │   │   ├── navigation-menu.tsx
+│   │   │   ├── pagination.tsx
+│   │   │   ├── popover.tsx
+│   │   │   ├── progress.tsx
+│   │   │   ├── radio-group.tsx
+│   │   │   ├── resizable.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── select.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+│   │   │   ├── sidebar.tsx
+│   │   │   ├── skeleton.tsx
+│   │   │   ├── slider.tsx
+│   │   │   ├── sonner.tsx
+│   │   │   ├── switch.tsx
+│   │   │   ├── table.tsx
+│   │   │   ├── tabs.tsx
+│   │   │   ├── textarea.tsx
+│   │   │   ├── toggle-group.tsx
+│   │   │   ├── toggle.tsx
+│   │   │   └── tooltip.tsx
+│   │   ├── BottomNav.tsx
+│   │   ├── PageShell.tsx
+│   │   └── PlaceList.tsx
+│   ├── data
+│   │   ├── gastronomia.json
+│   │   ├── historia.json
+│   │   ├── hospedagem.json
+│   │   ├── polos.json
+│   │   ├── programacao.json
+│   │   └── turismo.json
+│   ├── db
+│   │   ├── repositories
+│   │   │   ├── favoritosRepo.ts
+│   │   │   ├── metaRepo.ts
+│   │   │   ├── placesRepo.ts
+│   │   │   ├── polosRepo.ts
+│   │   │   └── programacaoRepo.ts
+│   │   ├── database.ts
+│   │   └── seed.ts
+│   ├── features
+│   │   ├── favoritos
+│   │   │   └── hooks
+│   │   │       └── useFavoritos.ts
+│   │   ├── historia
+│   │   │   └── hooks
+│   │   │       └── useHistoria.ts
+│   │   ├── lugares
+│   │   │   └── hooks
+│   │   │       └── useLugares.ts
+│   │   ├── polos
+│   │   │   └── hooks
+│   │   │       └── usePolos.ts
+│   │   └── programacao
+│   │       └── hooks
+│   │           └── useProgramacao.ts
+│   ├── hooks
+│   │   ├── use-mobile.tsx
+│   │   └── useOnlineStatus.ts
+│   ├── lib
+│   │   ├── error-capture.ts
+│   │   ├── error-page.ts
+│   │   └── utils.ts
+│   ├── pwa
+│   │   ├── InstallPrompt.tsx
+│   │   ├── pwa.d.ts
+│   │   ├── registerSW.ts
+│   │   └── UpdatePrompt.tsx
+│   ├── routes
+│   │   ├── __root.tsx
+│   │   ├── configuracoes.tsx
+│   │   ├── desenvolvedores.tsx
+│   │   ├── favoritos.tsx
+│   │   ├── gastronomia.tsx
+│   │   ├── hospedagem.tsx
+│   │   ├── index.tsx
+│   │   ├── mais.tsx
+│   │   ├── polo.$id.tsx
+│   │   ├── polos.tsx
+│   │   ├── programacao.tsx
+│   │   ├── sobre.tsx
+│   │   └── turismo.tsx
+│   ├── types
+│   │   └── domain.ts
+│   ├── router.tsx
+│   ├── routeTree.gen.ts
+│   ├── server.ts
+│   ├── start.ts
+│   └── styles.css
+├── .env
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── bun.lock
+├── bunfig.toml
+├── CLAUDE.md
+├── components.json
+├── eslint.config.js
+├── fix.txt
+├── OVERVIEW.md
+├── package-lock.json
+├── package.json
+├── SKILL.md
+├── tsconfig.json
+├── vite.config.ts
+└── wrangler.jsonc
