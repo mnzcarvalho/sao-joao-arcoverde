@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { useMemo, useRef } from "react";
 import topImg from "@/assets/top.png";
-import casalDancando from "@/assets/casal-dancando.png";
 import mapaPernambuco from "@/assets/mapa-pernambuco.png";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
 import { usePolos } from "@/features/polos/hooks/usePolos";

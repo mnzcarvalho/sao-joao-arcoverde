@@ -1,10 +1,10 @@
 [
   {
-    "id": "palco-principal",
-    "nome": "Palco Principal",
-    "descricao": "O grande palco do São João de Arcoverde, recebendo os maiores nomes do forró e da música nordestina.",
-    "endereco": "Praça da Bandeira, Centro - Arcoverde/PE",
-    "horario": "13 a 28 de junho — Shows a partir das 20h"
+    "id": "santo-antonio-ipojuca",
+    "nome": "Festa de Santo Antônio no Povoado Ipojuca",
+    "descricao": "Festa tradicional de Santo Antônio com filarmônica, noites litúrgicas, louvor e shows no Povoado Ipojuca.",
+    "endereco": "Povoado Ipojuca - Arcoverde/PE",
+    "horario": "05 a 14 de junho"
   },
   {
     "id": "raizes-coco",
@@ -14,31 +14,73 @@
     "horario": "19 a 24 de junho — A partir das 17h"
   },
   {
-    "id": "pe-de-serra",
-    "nome": "Polo Pé de Serra",
-    "descricao": "Forró raiz, sanfona, zabumba e triângulo. O forró autêntico de Arcoverde acontece aqui.",
-    "endereco": "Centro - Arcoverde/PE",
-    "horario": "Diariamente, das 19h às 03h"
+    "id": "corredor-cultural",
+    "nome": "Polo Corredor Cultural",
+    "descricao": "Maracatus e bandas de pífano celebrando a cultura tradicional do sertão no Corredor Cultural.",
+    "endereco": "Corredor Cultural - Arcoverde/PE",
+    "horario": "19 a 28 de junho — A partir das 19h"
+  },
+  {
+    "id": "cga",
+    "nome": "Polo do CGA",
+    "descricao": "Forró e shows ao meio-dia no Centro de Gestão e Aprendizagem.",
+    "endereco": "CGA - Arcoverde/PE",
+    "horario": "19 a 28 de junho — A partir das 12h"
+  },
+  {
+    "id": "multimusical",
+    "nome": "Polo Multimusical Rubens Pastor",
+    "descricao": "Rock, MPB, rap e música eletrônica. O polo da diversidade musical de Arcoverde.",
+    "endereco": "Rubens Pastor - Arcoverde/PE",
+    "horario": "19 a 24 de junho — A partir das 20h"
   },
   {
     "id": "polo-poesia",
-    "nome": "Polo da Poesia",
+    "nome": "Polo da Poesia Elizeu Pereira",
     "descricao": "Cordel, repente, declamações e poesia popular nordestina celebrando a palavra falada do sertão.",
     "endereco": "Centro Cultural - Arcoverde/PE",
-    "horario": "Diariamente, das 18h às 23h"
+    "horario": "19 a 28 de junho — A partir das 14h"
+  },
+  {
+    "id": "polo-cruz",
+    "nome": "Polo da Cruz",
+    "descricao": "Forró, arrocha e sanfona no Polo da Cruz.",
+    "endereco": "Polo da Cruz - Arcoverde/PE",
+    "horario": "19 a 24 de junho — A partir das 16h"
+  },
+  {
+    "id": "pe-de-serra",
+    "nome": "Polo Pé de Serra João Silva",
+    "descricao": "Forró raiz, sanfona, zabumba e triângulo. O forró autêntico de Arcoverde acontece aqui.",
+    "endereco": "Centro - Arcoverde/PE",
+    "horario": "19 a 28 de junho — A partir das 19h"
+  },
+  {
+    "id": "arraiá-cecora",
+    "nome": "Arraiá do Cecora",
+    "descricao": "Forró na feira e shows no Arraiá do Cecora.",
+    "endereco": "Cecora - Arcoverde/PE",
+    "horario": "13, 20 e 27 de junho — A partir das 10h"
   },
   {
     "id": "polo-artes",
-    "nome": "Polo das Artes",
-    "descricao": "Exposições, intervenções artísticas, artesanato local e mostras culturais.",
-    "endereco": "Centro - Arcoverde/PE",
-    "horario": "Diariamente, das 16h às 22h"
+    "nome": "Polo das Artes Henry Pereira",
+    "descricao": "Reisados, cocos, samba de coco, afoxés e quadrilhas juninas. A cultura viva de Arcoverde.",
+    "endereco": "Henry Pereira - Arcoverde/PE",
+    "horario": "19 a 28 de junho — A partir das 20h"
   },
   {
-    "id": "gastronomico",
-    "nome": "Polo Gastronômico",
-    "descricao": "Comidas típicas: cuscuz, canjica, pamonha, bolo de milho, caldos e doces juninos.",
-    "endereco": "Rua da Conceição, Centro - Arcoverde/PE",
-    "horario": "Diariamente, das 16h às 02h"
+    "id": "estacao-cultura",
+    "nome": "Estação da Cultura",
+    "descricao": "Exposição MOXOTÓ – MINHA ARTE, MINHA VIDA, de Romualdo Freitas.",
+    "endereco": "Estação da Cultura - Arcoverde/PE",
+    "horario": "19 a 28 de junho — 10h às 12h e 15h às 17h"
+  },
+  {
+    "id": "multicultural",
+    "nome": "Polo Multicultural",
+    "descricao": "O grande palco do São João de Arcoverde, recebendo os maiores nomes do forró e da música nordestina.",
+    "endereco": "Praça da Bandeira, Centro - Arcoverde/PE",
+    "horario": "13 a 28 de junho — Shows a partir das 18h"
   }
 ]

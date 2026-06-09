@@ -22,7 +22,31 @@ export const Route = createFileRoute("/programacao")({
 
 function Programacao() {
   const programacao = useProgramacao();
-  const polos = usePolos();
+  const allPolos = usePolos();
+
+  const POLO_ORDER = [
+    "multicultural",
+    "raizes-coco",
+    "pe-de-serra",
+    "polo-artes",
+    "cga",
+    "polo-poesia",
+    "multimusical",
+    "polo-cruz",
+  ];
+  const HIDDEN_POLOS = ["estacao-cultura"];
+
+  const polos = useMemo(() => {
+    const visible = allPolos.filter((p) => !HIDDEN_POLOS.includes(p.id));
+    const inOrder: typeof visible = [];
+    const rest: typeof visible = [];
+    for (const p of visible) {
+      if (POLO_ORDER.includes(p.id)) inOrder.push(p);
+      else rest.push(p);
+    }
+    inOrder.sort((a, b) => POLO_ORDER.indexOf(a.id) - POLO_ORDER.indexOf(b.id));
+    return [...inOrder, ...rest];
+  }, [allPolos]);
 
   const [activePolo, setActivePolo] = useState<string | undefined>();
   const [searchQuery, setSearchQuery] = useState("");
