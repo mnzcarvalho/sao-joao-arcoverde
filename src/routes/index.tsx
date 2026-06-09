@@ -158,42 +158,38 @@ function BannerCarousel() {
   };
 
   return (
-    <div className="w-full px-4 mt-2 mb-4 relative group">
-      {/* Container transparente */}
-      <div className="w-full h-56 sm:h-72 md:h-80 relative flex items-center justify-center bg-transparent">
-        
-        {/* Imagem do Cartaz: Ajustada para h-full e w-auto para a borda arredondada colar na foto */}
+    <div className="w-full relative group">
+      <div className="w-full h-auto relative flex items-center justify-center">
+
+        {/* Imagem do banner */}
         <img
           src={BANNERS[currentIndex].img}
           alt={BANNERS[currentIndex].alt}
-          className="h-full w-auto rounded-2xl drop-shadow-md transition-all duration-500"
-          key={currentIndex} 
+          className="w-full h-auto rounded-2xl shadow-lg transition-opacity duration-500"
+          key={currentIndex}
         />
 
-        {/* Controladores de Seta (Aparecem apenas no Desktop por cima do Hover) */}
+        {/* Setas de navegação (Sempre visíveis ou ajuste conforme necessário) */}
         <button
           onClick={prevSlide}
-          className="hidden md:group-hover:flex absolute top-1/2 left-4 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-xs"
+          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="hidden md:group-hover:flex absolute top-1/2 right-4 -translate-y-1/2 items-center justify-center w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-xs"
-        >
-          <ChevronRight className="h-5 w-5" />
+          <ChevronLeft className="h-6 w-6" />
         </button>
 
-        {/* Indicadores Visuais de Paginação (Dots) */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 max-w-[85%] overflow-x-auto no-scrollbar py-1 px-2 rounded-full bg-black/40 backdrop-blur-md">
+        <button
+          onClick={nextSlide}
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+
+        {/* Indicadores */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
           {BANNERS.map((_, index) => (
-            <button
+            <div
               key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-1.5 rounded-full transition-all duration-300 shrink-0 ${
-                currentIndex === index ? "w-4 bg-[color:var(--gold)]" : "w-1.5 bg-white/70"
-              }`}
-              aria-label={`Ir para banner ${index + 1}`}
+              className={`h-2 w-2 rounded-full ${currentIndex === index ? "bg-white" : "bg-white/50"}`}
             />
           ))}
         </div>
@@ -222,7 +218,7 @@ function Home() {
 
   return (
     <main className="mx-auto min-h-screen max-w-xl pb-28">
-       {/* ============ HERO ============ */}
+      {/* ============ HERO ============ */}
       <section className="hero-night relative overflow-hidden px-4 pt-0 pb-0 sm:px-5">
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
           <div className="absolute top-10 right-6 h-2 w-2 rounded-full bg-[color:var(--gold)] animate-sparkle" />
@@ -244,7 +240,7 @@ function Home() {
           />
         </div>
 
-        <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">          
+        <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">
           <p className="text-[10px] sm:text-[12px] md:text-sm font-medium leading-relaxed text-[color:var(--foreground)]/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
             Tradição, cultura e alegria que encantam gerações. Venha viver o <br />São João mais autêntico
             do país!
@@ -267,20 +263,18 @@ function Home() {
         </div>
       </section>
 
-      
+
 
       {/* ============ O QUE VOCÊ PROCURA ============ */}
-      
       <section className="bg-cream px-4 pt-6 pb-7">
-        {/* ============ BANNERS ROTATIVOS (Adicionado Aqui) ============ */}
-      <BannerCarousel />
         <h2 className="mb-4 flex items-center justify-center gap-2 text-center text-base font-extrabold uppercase tracking-wider text-on-cream">
           <Sparkles className="h-4 w-4 text-[color:var(--bonfire)]" />
           O que você procura?
           <Sparkles className="h-4 w-4 text-[color:var(--bonfire)]" />
         </h2>
 
-        <div className="grid grid-cols-2 gap-3">
+        {/* Grade de Botões (Mantida como você pediu) */}
+        <div className="grid grid-cols-2 gap-3 mb-8">
           {tiles.map(({ to, label, desc, icon: Icon, color }) => (
             <Link key={to} to={to} className="tile-light group flex flex-col gap-2 p-3.5">
               <div
@@ -302,84 +296,99 @@ function Home() {
             </Link>
           ))}
         </div>
-      </section>
 
-      {/* ============ PROGRAMAÇÃO EM DESTAQUE ============ */}
-      <section className="px-4 pt-6">
-        <div className="card-night relative p-4">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-white">
-              <Sparkles className="h-4 w-4 text-[color:var(--gold)]" />
-              Programação em destaque
-            </h2>
-            <Link
-              to="/programacao"
-              className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-semibold text-white/90 hover:bg-white/10"
-            >
-              Ver toda <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-
-          <div className="relative">
-            <button
-              onClick={() => scrollBy(-1)}
-              aria-label="Anterior"
-              className="absolute -left-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              aria-label="Próximo"
-              className="absolute -right-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-
-            <div
-              ref={carouselRef}
-              className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {destaques.length === 0 && (
-                <p className="px-2 py-6 text-sm text-white/60">Programação em breve.</p>
-              )}
-              {destaques.map((s) => {
-                const { dia, mes } = formatDay(s.data);
-                return (
-                  <Link
-                    key={s.id}
-                    to="/programacao"
-                    className="group relative w-[160px] flex-none snap-start overflow-hidden rounded-2xl bg-gradient-to-b from-white/10 to-white/[0.02] ring-1 ring-white/10 hover:ring-[color:var(--magenta)]/40"
-                  >
-                    <div className="relative h-[88px] overflow-hidden bg-gradient-to-br from-[color:var(--magenta)]/40 via-[color:var(--bonfire)]/30 to-[color:var(--gold)]/30">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.25),transparent_60%)]" />
-                      <div className="show-date-chip absolute left-2 top-2 flex flex-col items-center px-2 py-1.5">
-                        <span className="text-[15px] leading-none">{dia}</span>
-                        <span className="text-[9px] font-bold tracking-wider">{mes}</span>
-                      </div>
-                      <Music className="absolute bottom-2 right-2 h-5 w-5 text-white/80" />
-                    </div>
-                    <div className="p-2.5">
-                      <p className="truncate text-[12.5px] font-bold text-white">{s.artista}</p>
-                      <p className="mt-1 flex items-center gap-1 truncate text-[10.5px] text-white/70">
-                        <MapPin className="h-3 w-3" />
-                        {poloNome.get(s.polo) ?? s.polo}
-                      </p>
-                      {s.genero && (
-                        <p className="mt-0.5 truncate text-[10px] text-[color:var(--gold)]/90">
-                          {s.genero}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+        {/* Título "Todos os Polos" com a cor #1D0044 aplicada diretamente na barra */}
+        <div
+          className="mx-4 mb-5 flex items-center justify-center rounded-xl py-3 px-6 shadow-md border-b-4 border-[color:var(--flag-yellow)]"
+          style={{ backgroundColor: "#1D0044" }}
+        >
+          <h3 className="font-display text-xl font-bold uppercase tracking-widest text-white drop-shadow-sm">
+            Polos e atrações!
+          </h3>
         </div>
+
+        {/* Banner com setas */}
+        <BannerCarousel />
       </section>
 
-       {/* ============ SEÇÃO TRADIÇÃO E HISTÓRIA ============ */}
+     {/* ============ PROGRAMAÇÃO EM DESTAQUE ============ */}
+<section className="px-4 pt-6">
+  <div className="card-night relative p-4">
+    <div className="mb-4 flex items-center justify-between gap-3">
+      <h2 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-white">
+        <Sparkles className="h-4 w-4 text-[color:var(--gold)]" />
+        Programação em destaque
+      </h2>
+      <Link
+        to="/programacao"
+        className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-semibold text-white/90 hover:bg-white/10"
+      >
+        Ver toda <ArrowRight className="h-3 w-3" />
+      </Link>
+    </div>
+
+    <div className="relative">
+      <button
+        onClick={() => scrollBy(-1)}
+        aria-label="Anterior"
+        className="absolute -left-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+      <button
+        onClick={() => scrollBy(1)}
+        aria-label="Próximo"
+        className="absolute -right-2 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:grid"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+
+      <div
+        ref={carouselRef}
+        className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {destaques.length === 0 && (
+          <p className="px-2 py-6 text-sm text-white/60">Programação em breve.</p>
+        )}
+        
+        {/* Listagem original sem filtros */}
+        {destaques.map((s) => {
+          const { dia, mes } = formatDay(s.data);
+          return (
+            <Link
+              key={s.id}
+              to="/programacao"
+              className="group relative w-[160px] flex-none snap-start overflow-hidden rounded-2xl bg-gradient-to-b from-white/10 to-white/[0.02] ring-1 ring-white/10 hover:ring-[color:var(--magenta)]/40"
+            >
+              <div className="relative h-[88px] overflow-hidden bg-gradient-to-br from-[color:var(--magenta)]/40 via-[color:var(--bonfire)]/30 to-[color:var(--gold)]/30">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.25),transparent_60%)]" />
+                <div className="show-date-chip absolute left-2 top-2 flex flex-col items-center px-2 py-1.5">
+                  <span className="text-[15px] leading-none">{dia}</span>
+                  <span className="text-[9px] font-bold tracking-wider">{mes}</span>
+                </div>
+                <Music className="absolute bottom-2 right-2 h-5 w-5 text-white/80" />
+              </div>
+              <div className="p-2.5">
+                <p className="truncate text-[12.5px] font-bold text-white">{s.artista}</p>
+                <p className="mt-1 flex items-center gap-1 truncate text-[10.5px] text-white/70">
+                  <MapPin className="h-3 w-3" />
+                  {poloNome.get(s.polo) ?? s.polo}
+                </p>
+                {s.genero && (
+                  <p className="mt-0.5 truncate text-[10px] text-[color:var(--gold)]/90">
+                    {s.genero}
+                  </p>
+                )}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* ============ SEÇÃO TRADIÇÃO E HISTÓRIA ============ */}
       <section className="px-4 pt-6">
         <div className="card-night relative overflow-hidden p-4 sm:p-6 flex flex-row items-center justify-between gap-3 sm:gap-6">
           <div className="flex flex-col items-start text-left space-y-3 w-[65%] sm:flex-1">
@@ -402,10 +411,10 @@ function Home() {
           </div>
 
           <div className="flex flex-col items-center text-center w-[35%] shrink-0 space-y-1.5">
-            <img 
-              src={mapaPernambuco} 
-              alt="Mapa de Pernambuco" 
-              className="w-full max-w-[90px] sm:max-w-[140px] h-auto object-contain" 
+            <img
+              src={mapaPernambuco}
+              alt="Mapa de Pernambuco"
+              className="w-full max-w-[90px] sm:max-w-[140px] h-auto object-contain"
             />
             <div className="leading-tight">
               <p className="text-[10px] sm:text-[12px] font-black uppercase tracking-wider text-[color:var(--gold)]">
