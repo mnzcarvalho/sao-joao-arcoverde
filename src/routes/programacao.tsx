@@ -189,13 +189,9 @@ function Programacao() {
     <PageShell>
       <PageHeader
         title="Programação"
-        subtitle={selectedDay ? `Todos os polos em ${selectedDayLabel}` : showAllPolos ? "Todos os polos" : "Filtre por polo"}
+        subtitle={selectedDay ? `Filtrado por ${selectedDayLabel}` : showAllPolos ? "Todos os polos" : "Filtre por polo"}
         action={
-          selectedDay ? (
-            <span className="text-right text-xs font-bold uppercase tracking-wide text-muted-foreground">
-              {selectedDayLabel}
-            </span>
-          ) : showAllPolos ? (
+          showAllPolos ? (
             <span className="text-right text-xs font-bold uppercase tracking-wide text-muted-foreground">
               Todos os polos
             </span>
@@ -287,7 +283,6 @@ function Programacao() {
             onClick={() => {
               setShowAllPolos(true);
               setActivePolo(undefined);
-              setSelectedDay(undefined);
             }}
             className={`shrink-0 h-full rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition ${
               showAllPolos
@@ -315,6 +310,22 @@ function Programacao() {
           ))}
         </div>
       </div>
+
+      {selectedDay && (
+        <div className="px-4 mb-2">
+          <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 bg-[var(--gold)] text-[var(--accent-foreground)] text-xs font-bold uppercase tracking-wide">
+            <span>Filtrando por {selectedDayLabel}</span>
+            <button
+              type="button"
+              onClick={() => setSelectedDay(undefined)}
+              className="p-0.5 rounded-full hover:bg-white/30 transition"
+              aria-label="Remover filtro de dia"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {!polos.length && !programacao.length ? (
         <p className="px-4 text-sm text-muted-foreground">Carregando programação…</p>
