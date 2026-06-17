@@ -182,7 +182,7 @@ function BannerCarousel() {
             key={BANNERS[i].id}
             src={BANNERS[i].img}
             alt={BANNERS[i].alt}
-            className={`absolute inset-0 w-full h-full object-cover rounded-2xl transition-opacity duration-500 ${
+            className={`absolute inset-0 w-full h-full object-contain rounded-2xl transition-opacity duration-500 ${
               i === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             loading={i === currentIndex ? "eager" : "lazy"}
@@ -236,7 +236,7 @@ function Home() {
   return (
     <main className="mx-auto min-h-screen max-w-xl pb-28">
       {/* ============ HERO ============ */}
-      <section className="hero-night relative overflow-hidden px-4 pt-0 pb-0 sm:px-5">
+      <section className="hero-night relative px-4 pt-0 sm:px-5">
         <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
           <div className="absolute top-10 right-6 h-2 w-2 rounded-full bg-[color:var(--gold)] animate-sparkle" />
           <div
@@ -255,27 +255,28 @@ function Home() {
             alt="São João de Arcoverde — O melhor do Brasil"
             className="w-full block drop-shadow-[0_6px_18px_rgba(214,51,132,0.35)]"
           />
-        </div>
 
-        <div className="relative -mt-[40%] sm:-mt-[35%] z-10 space-y-2 max-w-[48%] pl-4 pb-6 flex flex-col items-start text-left">
-          <p className="text-[10px] sm:text-[12px] md:text-sm font-medium leading-relaxed text-[color:var(--foreground)]/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-            Tradição, cultura e alegria que encantam gerações. Venha viver o <br />São João mais autêntico
-            do país!
-          </p>
+          <div className="absolute bottom-0 left-0 right-0 z-10 pl-4 pb-2 sm:pb-5 flex flex-col items-start text-left space-y-1.5 max-w-[48%]">
+            <p className="text-[9px] sm:text-[12px] md:text-sm font-medium leading-relaxed text-[color:var(--foreground)]/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+              Tradição, cultura e alegria que <br/>
+              encantam gerações. Venha viver o <br/>São João mais autêntico do país!
 
-          <div className="date-badge inline-flex max-w-full items-center gap-1.5 rounded-full px-3 py-1.5 text-[9px] font-bold text-[color:var(--gold)] sm:text-[11px] bg-night/70 backdrop-blur-sm border border-white/5 shadow-md">
-            <Calendar className="h-3.5 w-3.5 shrink-0" />
-            <span className="whitespace-nowrap">13 a 28 de junho · 2026</span>
-          </div>
+            </p>
 
-          <div className="w-full">
-            <Link
-              to="/programacao"
-              className="cta-festa inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[9px] font-extrabold uppercase tracking-wide sm:text-xs shadow-glow border border-white/10"
-            >
-              <span className="truncate">Veja a programação completa</span>
-              <ArrowRight className="h-3.5 w-3.5 shrink-0" />
-            </Link>
+            <div className="date-badge inline-flex max-w-full items-center gap-1.5 rounded-full px-2.5 py-1 text-[8px] font-bold text-[color:var(--gold)] sm:text-[11px] bg-night/70 backdrop-blur-sm border border-white/5 shadow-md">
+              <Calendar className="h-3 w-3 shrink-0" />
+              <span className="whitespace-nowrap">13 a 28 de junho · 2026</span>
+            </div>
+
+            <div className="w-full">
+              <Link
+                to="/programacao"
+                className="cta-festa inline-flex w-full items-center justify-center gap-1 rounded-full px-2.5 py-1.5 text-[8px] font-extrabold uppercase tracking-wide sm:text-xs shadow-glow border border-white/10"
+              >
+                <span className="truncate">Veja a programação completa</span>
+                <ArrowRight className="h-3 w-3 shrink-0" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
