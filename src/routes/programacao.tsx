@@ -104,7 +104,7 @@ function Programacao() {
         s.artista.toLowerCase().includes(query) || 
         (s.genero && s.genero.toLowerCase().includes(query));
 
-      return matchesPolo && matchesSearch;
+      return (s.polo === activePolo || query) && matchesSearch;
     });
   }, [programacao, activePolo, searchQuery]);
 
