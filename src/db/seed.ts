@@ -23,7 +23,7 @@ function safeParse<T>(schema: z.ZodSchema<T>, items: unknown[], label: string): 
     .filter(Boolean) as T[];
 }
 
-const SEED_VERSION = 8;
+const SEED_VERSION = 9;
 const SEED_KEY = "seedVersion";
 
 /**

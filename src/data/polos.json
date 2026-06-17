@@ -8,10 +8,11 @@
   },
   {
     "id": "raizes-coco",
-    "nome": "Polo Raízes do Coco — Lula Calixto",
+    "nome": "Polo Raízes do Coco Lula Calixto",
+    "nomeCurto": "Polo Raízes do Coco",
     "descricao": "Palco dedicado ao Samba de Coco e à cultura tradicional do Alto do Cruzeiro, berço dos Raízes de Arcoverde.",
     "endereco": "Alto do Cruzeiro - Arcoverde/PE",
-    "horario": "19 a 24 de junho — A partir das 17h"
+    "horario": "19 a 24 de junho - A partir das 17h"
   },
   {
     "id": "corredor-cultural",
@@ -30,6 +31,7 @@
   {
     "id": "multimusical",
     "nome": "Polo Multimusical Rubens Pastor",
+    "nomeCurto": "Polo Multimusical",
     "descricao": "Rock, MPB, rap e música eletrônica. O polo da diversidade musical de Arcoverde.",
     "endereco": "Rubens Pastor - Arcoverde/PE",
     "horario": "19 a 24 de junho — A partir das 20h"
@@ -37,6 +39,7 @@
   {
     "id": "polo-poesia",
     "nome": "Polo da Poesia Elizeu Pereira",
+    "nomeCurto": "Polo da Poesia",
     "descricao": "Cordel, repente, declamações e poesia popular nordestina celebrando a palavra falada do sertão.",
     "endereco": "Centro Cultural - Arcoverde/PE",
     "horario": "19 a 28 de junho — A partir das 14h"
@@ -51,6 +54,7 @@
   {
     "id": "pe-de-serra",
     "nome": "Polo Pé de Serra João Silva",
+    "nomeCurto": "Polo Pé de Serra",
     "descricao": "Forró raiz, sanfona, zabumba e triângulo. O forró autêntico de Arcoverde acontece aqui.",
     "endereco": "Centro - Arcoverde/PE",
     "horario": "19 a 28 de junho — A partir das 19h"
@@ -65,6 +69,7 @@
   {
     "id": "polo-artes",
     "nome": "Polo das Artes Henry Pereira",
+    "nomeCurto": "Polo das Artes",
     "descricao": "Reisados, cocos, samba de coco, afoxés e quadrilhas juninas. A cultura viva de Arcoverde.",
     "endereco": "Henry Pereira - Arcoverde/PE",
     "horario": "19 a 28 de junho — A partir das 20h"

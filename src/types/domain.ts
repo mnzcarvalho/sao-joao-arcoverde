@@ -3,6 +3,7 @@ import { z } from "zod";
 export const PoloSchema = z.object({
   id: z.string(),
   nome: z.string(),
+  nomeCurto: z.string().optional(),
   descricao: z.string(),
   endereco: z.string(),
   horario: z.string(),
