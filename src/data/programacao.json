@@ -231,7 +231,7 @@
     "artista": "Maciel Melo",
     "polo": "raizes-coco",
     "genero": "Forró Pé de Serra",
-    "imagem": "/artistas/forro-pe-serra.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Macielmelo_flickr.jpg/500px-Macielmelo_flickr.jpg"
   },
   {
     "id": "rc-20-4",
@@ -312,7 +312,7 @@
     "artista": "Joyce Alane",
     "polo": "raizes-coco",
     "genero": "Forró",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Joyce_Alane_%28cropped%29.png"
   },
   {
     "id": "rc-23-3",
@@ -1518,7 +1518,7 @@
     "artista": "Alceu Valença",
     "polo": "multicultural",
     "genero": "MPB Nordestina",
-    "imagem": "/artistas/pop.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/-2024-06-30-_Alceu_Valen%C3%A7a_no_S%C3%ADtio_Trindade_001_-_Romerito_Pontes_%2853827987723%29_%28cropped%29.jpg/500px--2024-06-30-_Alceu_Valen%C3%A7a_no_S%C3%ADtio_Trindade_001_-_Romerito_Pontes_%2853827987723%29_%28cropped%29.jpg"
   },
   {
     "id": "pp-14-1",
@@ -1572,7 +1572,7 @@
     "artista": "Zé Vaqueiro",
     "polo": "multicultural",
     "genero": "Piseiro",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Shows_no_Arrai%C3%A1_do_Povo_-_30.05.2025_%286%29_%28cropped%29.jpg/500px-Shows_no_Arrai%C3%A1_do_Povo_-_30.05.2025_%286%29_%28cropped%29.jpg"
   },
   {
     "id": "pp-16-3",
@@ -1581,7 +1581,7 @@
     "artista": "Nattan",
     "polo": "multicultural",
     "genero": "Forró Eletrônico",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Nattan_-_Pared%C3%A3o_do_Nattan_%28%40superafteer%29.png/500px-Nattan_-_Pared%C3%A3o_do_Nattan_%28%40superafteer%29.png"
   },
   {
     "id": "pp-17-1",
@@ -1608,7 +1608,7 @@
     "artista": "Vitor Fernandes",
     "polo": "multicultural",
     "genero": "Forró",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Ver%C3%A3o_Sergipe_-_Pacatuba_-_24.01.2025_%282%29_%28cropped%29.jpg/500px-Ver%C3%A3o_Sergipe_-_Pacatuba_-_24.01.2025_%282%29_%28cropped%29.jpg"
   },
   {
     "id": "pp-18-1",
@@ -1635,7 +1635,7 @@
     "artista": "Wesley Safadão",
     "polo": "multicultural",
     "genero": "Forró Eletrônico",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Wesley_Safad%C3%A3o_Citibank_Hall_2017_%2836674588052%29_%28cropped%29.jpg/500px-Wesley_Safad%C3%A3o_Citibank_Hall_2017_%2836674588052%29_%28cropped%29.jpg"
   },
   {
     "id": "pp-19-1",
@@ -1734,7 +1734,7 @@
     "artista": "Felipe Amorim",
     "polo": "multicultural",
     "genero": "Forró",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/4/46/2024-01-01_R%C3%A9veillon_Beira_Rio_%C3%A0s_margens_do_Rio_Amazonas_01_%28cropped%29.jpg"
   },
   {
     "id": "pp-22-1",
@@ -1824,7 +1824,7 @@
     "artista": "Xand Avião",
     "polo": "multicultural",
     "genero": "Forró Eletrônico",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/XAND_CARUARU-26.jpg/500px-XAND_CARUARU-26.jpg"
   },
   {
     "id": "pp-25-1",
@@ -1851,7 +1851,7 @@
     "artista": "João Gomes",
     "polo": "multicultural",
     "genero": "Piseiro",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Jo%C3%A3o_Gomes_-_Se_Joga_no_Vulc%C3%A3o_2024.png/500px-Jo%C3%A3o_Gomes_-_Se_Joga_no_Vulc%C3%A3o_2024.png"
   },
   {
     "id": "pp-26-1",
@@ -1905,7 +1905,7 @@
     "artista": "Limão com Mel",
     "polo": "multicultural",
     "genero": "Forró",
-    "imagem": "/artistas/forro-eletronico.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/pt/d/dc/Lim%C3%A3o_com_Mel_logo.png"
   },
   {
     "id": "pp-28-1",
@@ -1932,6 +1932,6 @@
     "artista": "Matheus & Kauan",
     "polo": "multicultural",
     "genero": "Sertanejo",
-    "imagem": "/artistas/pop.svg"
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/MATHEUS_%26_KAUAN.jpg/500px-MATHEUS_%26_KAUAN.jpg"
   }
 ]
