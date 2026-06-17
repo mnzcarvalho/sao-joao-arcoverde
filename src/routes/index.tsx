@@ -224,9 +224,21 @@ function Home() {
     return map;
   }, [polos]);
 
+  const hoje = useMemo(() => new Date().toISOString().slice(0, 10), []);
+
   const destaques: Show[] = useMemo(() => {
-    return [...shows].sort((a, b) => a.data.localeCompare(b.data)).slice(0, 8);
-  }, [shows]);
+    const multicultural = [...shows]
+      .filter((s) => s.polo === "multicultural")
+      .sort((a, b) => a.data.localeCompare(b.data) || a.hora.localeCompare(b.hora));
+
+    const deHoje = multicultural.filter((s) => s.data === hoje);
+    if (deHoje.length > 0) return deHoje;
+
+    const proximos = multicultural.filter((s) => s.data >= hoje);
+    if (proximos.length > 0) return proximos;
+
+    return multicultural.slice(-8);
+  }, [shows, hoje]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const scrollBy = (dir: 1 | -1) => {
