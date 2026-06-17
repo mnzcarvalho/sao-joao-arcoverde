@@ -14,8 +14,8 @@ import {
   Sparkles,
   Heart,
 } from "lucide-react";
-import { useMemo, useRef, useState, useEffect } from "react";
-import topImg from "@/assets/top.png";
+import { useMemo, useRef, useState, useEffect, useCallback } from "react";
+import topImg from "@/assets/top.jpg";
 import mapaPernambuco from "@/assets/mapa-pernambuco.png";
 import { useProgramacao } from "@/features/programacao/hooks/useProgramacao";
 import { usePolos } from "@/features/polos/hooks/usePolos";
@@ -134,58 +134,75 @@ function formatDay(iso: string) {
   return { dia: d, mes: months[Number(m)] ?? "" };
 }
 
-// Componente Interno do Carrossel de Banners
+function getVizinhos(idx: number, len: number): number[] {
+  const prev2 = (idx - 2 + len) % len;
+  const prev1 = (idx - 1 + len) % len;
+  const next1 = (idx + 1) % len;
+  const next2 = (idx + 2) % len;
+  return [prev2, prev1, next1, next2];
+}
+
 function BannerCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [currentIndex]);
+  const len = BANNERS.length;
 
   const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? BANNERS.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    setCurrentIndex((i) => (i === 0 ? len - 1 : i - 1));
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === BANNERS.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+    setCurrentIndex((i) => (i === len - 1 ? 0 : i + 1));
   };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const vizinhos = getVizinhos(currentIndex, len);
+    vizinhos.forEach((i) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = BANNERS[i].img;
+      document.head.appendChild(link);
+      setTimeout(() => link.remove(), 2000);
+    });
+  }, [currentIndex]);
+
+  const ativos = [currentIndex, ...getVizinhos(currentIndex, len)];
 
   return (
     <div className="w-full relative group">
-      <div className="w-full h-auto relative flex items-center justify-center">
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
+        {ativos.map((i) => (
+          <img
+            key={BANNERS[i].id}
+            src={BANNERS[i].img}
+            alt={BANNERS[i].alt}
+            className={`absolute inset-0 w-full h-full object-cover rounded-2xl transition-opacity duration-500 ${
+              i === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+            loading={i === currentIndex ? "eager" : "lazy"}
+          />
+        ))}
 
-        {/* Imagem do banner */}
-        <img
-          src={BANNERS[currentIndex].img}
-          alt={BANNERS[currentIndex].alt}
-          className="w-full h-auto rounded-2xl shadow-lg transition-opacity duration-500"
-          key={currentIndex}
-        />
-
-        {/* Setas de navegação (Sempre visíveis ou ajuste conforme necessário) */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
-
         <button
           onClick={nextSlide}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 shadow-md text-black hover:bg-white transition"
         >
           <ChevronRight className="h-6 w-6" />
         </button>
 
-        {/* Indicadores */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
           {BANNERS.map((_, index) => (
             <div
               key={index}
