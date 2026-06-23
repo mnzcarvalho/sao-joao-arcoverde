@@ -49,7 +49,7 @@ function Devs() {
           </div>
           <div className="mt-4 space-y-2 text-center text-sm">
             <p className="font-semibold">Orientador</p>
-            <p className="text-muted-foreground">Williams de Jesus</p>
+            <p className="text-muted-foreground">Willams de Jesus</p>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
               Projeto desenvolvido na AESA — 3º Período de Análise e Desenvolvimento de Sistemas (ADS), maio/junho de 2026.
             </p>

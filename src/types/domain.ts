@@ -17,6 +17,7 @@ export const ShowSchema = z.object({
   artista: z.string(),
   polo: z.string(),
   genero: z.string().optional().default(""),
+  imagem: z.string().optional().default(""),
 });
 export type Show = z.infer<typeof ShowSchema>;
 

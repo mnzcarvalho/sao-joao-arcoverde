@@ -377,7 +377,7 @@ function Programacao() {
 function ShowItem({ show }: { show: Show }) {
   const isFav = useIsFavorito(show.id);
 
-  const fotoArtista = (show as any).imagem || (show as any).fotoUrl || (show as any).foto;
+  const fotoArtista = show.imagem;
 
   const temHorarioValido = show.hora && show.hora.trim() !== "";
 
