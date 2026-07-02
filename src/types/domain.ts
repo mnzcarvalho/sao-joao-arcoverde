@@ -29,6 +29,7 @@ export const LugarSchema = z.object({
   endereco: z.string(),
   contato: z.string().optional(),
   linkMaps: z.string().optional(),
+  imagem: z.string().optional(),
 });
 export type Lugar = z.infer<typeof LugarSchema>;
 
