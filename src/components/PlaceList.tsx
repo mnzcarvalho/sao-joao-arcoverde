@@ -6,8 +6,7 @@ interface Props {
   emptyLabel?: string;
 }
 
-const mapsUrl = (q: string) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+
 
 export function PlaceList({ items, emptyLabel }: Props) {
   if (!items.length)
@@ -22,7 +21,7 @@ export function PlaceList({ items, emptyLabel }: Props) {
           <p className="mt-1 text-sm text-muted-foreground">{it.descricao}</p>
           <div className="mt-3 space-y-1.5 text-xs">
             <a
-              href={mapsUrl(it.endereco)}
+              href={it.linkMaps}
               target="_blank"
               rel="noreferrer"
               className="flex items-start gap-1 text-accent underline-offset-2 hover:underline"
